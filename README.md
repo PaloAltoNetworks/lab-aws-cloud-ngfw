@@ -40,7 +40,7 @@ git clone https://github.com/PaloAltoNetworks/lab-aws-cloud-ngfw.git
 ### Deploy the Cloud Resources
 - Change your current working directory to the git repository's root directory
 ```
-cd panw-cloud-ngfw-qwiklab
+cd lab-aws-cloud-ngfw
 ```
 - Run the setup script included in the git root directory.
 ```
