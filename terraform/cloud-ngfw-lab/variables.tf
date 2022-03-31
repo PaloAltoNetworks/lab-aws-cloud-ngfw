@@ -22,8 +22,6 @@ variable transit-gateway { default = {} }
 variable transit-gateway-associations { default = {} }
 variable transit-gateway-routes { default = {} }
 
-variable "region" { default = "" }
-variable "ssh-key-name" { default = "" }
 variable "prefix-name-tag" { default = "" }
 
 variable global_tags {

@@ -38,11 +38,14 @@ resource "aws_internet_gateway" "this" {
   vpc_id  = aws_vpc.this.id
 }
 
+data "aws_region" "current" {}
+data "aws_availability_zones" "available" { state = "available" }
+
 resource "aws_subnet" "this" {
   for_each = { for subnet in var.subnets: subnet.name => subnet }
 
   cidr_block = each.value.cidr
-  availability_zone = "${var.region}${lookup(each.value, "az", null)}"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
   tags = merge({ Name = "${var.prefix-name-tag}${var.vpc.name}-${each.value.name}" }, var.global_tags)
   vpc_id = aws_vpc.this.id
 }
@@ -123,6 +126,13 @@ data "aws_ami" "latest_ecs" {
   }
 }
 
+data "aws_key_pair" "key_name" {
+  filter {
+    name = "key-name"
+    values = ["qwikLABS-*"]
+  }
+}
+
 resource "aws_instance" "this" {
   for_each = { for instance in var.ec2-instances: instance.name => instance }
 
@@ -131,7 +141,7 @@ resource "aws_instance" "this" {
   user_data                   = file("${path.module}/${each.value.setup-file}")
   subnet_id                   = local.subnet_ids["${var.prefix-name-tag}${var.vpc.name}-${each.value.subnet}"]
   security_groups             = local.sg-ids
-  key_name                    = var.ssh-key-name
+  key_name                    = data.aws_key_pair.key_name.key_name
 
   tags = merge({ Name = "${var.prefix-name-tag}${each.value.name}" }, var.global_tags)
 }

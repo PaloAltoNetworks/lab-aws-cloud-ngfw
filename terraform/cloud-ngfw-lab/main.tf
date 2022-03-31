@@ -1,15 +1,13 @@
-provider "aws" { region = var.region }
+provider "aws" {}
 
 module "vulnerable-vpc" {
     source           = "../modules/vpc"
     vpc              = var.vulnerable-vpc
     prefix-name-tag  = var.prefix-name-tag
-    region           = var.region
     subnets          = var.vulnerable-vpc-subnets
     route-tables     = var.vulnerable-vpc-route-tables
     security-groups  = var.vulnerable-vpc-security-groups
     ec2-instances    = var.vulnerable-vpc-instances
-    ssh-key-name     = var.ssh-key-name
     global_tags      = var.global_tags
 }
 
@@ -17,12 +15,10 @@ module "attack-vpc" {
     source          = "../modules/vpc"
     vpc             = var.attack-vpc
     prefix-name-tag = var.prefix-name-tag
-    region          = var.region
     subnets         = var.attack-vpc-subnets
     route-tables    = var.attack-vpc-route-tables
     ec2-instances   = var.attack-vpc-instances
     security-groups = var.attack-vpc-security-groups
-    ssh-key-name    = var.ssh-key-name
     global_tags     = var.global_tags
 }
 
@@ -30,7 +26,6 @@ module "security-vpc" {
     source          = "../modules/vpc"
     vpc             = var.security-vpc
     prefix-name-tag = var.prefix-name-tag
-    region          = var.region
     subnets         = var.security-vpc-subnets
     route-tables    = var.security-vpc-route-tables
     global_tags     = var.global_tags
