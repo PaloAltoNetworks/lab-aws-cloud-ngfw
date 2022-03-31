@@ -35,7 +35,7 @@ For the purpose of this lab, we will use AWS CloudShell for deploying the AWS Cl
 ### Clone the Git Repository
 Clone the Repository with the terraform to deploy
 ```
-git clone https://github.com/vsrkrishnan/panw-cloud-ngfw-qwiklab.git
+git clone https://github.com/PaloAltoNetworks/lab-aws-cloud-ngfw.git
 ```
 ### Deploy the Cloud Resources
 - Change your current working directory to the git repository's root directory
