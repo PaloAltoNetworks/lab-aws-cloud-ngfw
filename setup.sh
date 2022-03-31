@@ -29,7 +29,7 @@ install-prerequisites
 terraform-install
 
 # Assuming that this setup script is being run from the cloned github repo, changing the current working directory to one from where Terraform will deploy the lab resources.
-cd "${HOME}/panw-cloud-ngfw-qwiklab/terraform/cloud-ngfw-lab"
+cd "${HOME}/lab-aws-cloud-ngfw/terraform/cloud-ngfw-lab"
 
 # Initialize terraform
 echo "Initializing directory for lab resource deployment"
