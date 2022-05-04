@@ -23,6 +23,11 @@ locals {
   igw-id = {
     "${aws_internet_gateway.this.tags["Name"]}" : aws_internet_gateway.this.id
   }
+
+  eni-ids = {
+    for k, interface in aws_network_interface.private:
+      interface.tags["Name"] => interface.id
+  }
 }
 
 resource "aws_vpc" "this" {
@@ -133,15 +138,26 @@ data "aws_key_pair" "key_name" {
   }
 }
 
+resource "aws_network_interface" "private" {
+  for_each = { for instance in var.ec2-instances: instance.name => instance }
+
+  subnet_id = local.subnet_ids["${var.prefix-name-tag}${var.vpc.name}-${each.value.subnet}"]
+  private_ips = each.value.private_ips
+  security_groups = local.sg-ids
+  tags = merge({ Name = "${var.prefix-name-tag}${each.value.name}-primary-interface" }, var.global_tags)
+}
+
 resource "aws_instance" "this" {
   for_each = { for instance in var.ec2-instances: instance.name => instance }
 
   ami                         = data.aws_ami.latest_ecs.id
   instance_type               = each.value.instance_type
   user_data                   = file("${path.module}/${each.value.setup-file}")
-  subnet_id                   = local.subnet_ids["${var.prefix-name-tag}${var.vpc.name}-${each.value.subnet}"]
-  security_groups             = local.sg-ids
   key_name                    = data.aws_key_pair.key_name.key_name
+  network_interface {
+    network_interface_id = local.eni-ids["${var.prefix-name-tag}${each.value.name}-primary-interface"]
+    device_index = 0
+  }
 
   tags = merge({ Name = "${var.prefix-name-tag}${each.value.name}" }, var.global_tags)
 }

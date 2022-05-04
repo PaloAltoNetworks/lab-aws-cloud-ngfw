@@ -75,5 +75,6 @@ attack-vpc-instances = [
     instance_type = "t2.micro"
     subnet        = "subnet"
     setup-file    = "att-app-svr.sh"
+    private_ips   = ["10.2.1.100"]
   }
 ]

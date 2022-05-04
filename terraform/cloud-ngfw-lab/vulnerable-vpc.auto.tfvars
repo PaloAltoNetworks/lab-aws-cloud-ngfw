@@ -56,6 +56,7 @@ vulnerable-vpc-instances = [
     instance_type = "t2.micro"
     subnet        = "subnet"
     setup-file    = "vul-app-svr.sh"
+    private_ips   = ["10.1.1.100"]
   }
 ]
 
