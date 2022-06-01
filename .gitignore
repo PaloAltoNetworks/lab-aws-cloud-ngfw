@@ -2,3 +2,4 @@
 *.tfstate*
 tests/
 .DS_Store
+.ssh-keys/
