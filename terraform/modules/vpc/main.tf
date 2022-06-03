@@ -28,6 +28,11 @@ locals {
     for k, interface in aws_network_interface.private:
       interface.tags["Name"] => interface.id
   }
+
+  ec2-ips = {
+    for k, address in aws_eip.elasticip:
+      k => address.public_ip
+  }
 }
 
 resource "aws_vpc" "this" {
@@ -178,4 +183,8 @@ output "vpc_details" {
     "security-groups" : local.sg-ids
     "instance"        : local.ec2-ids
   }
+}
+
+output "instance_ips" {
+  value = local.ec2-ips
 }

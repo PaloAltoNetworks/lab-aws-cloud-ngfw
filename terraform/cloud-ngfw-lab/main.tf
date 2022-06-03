@@ -56,3 +56,11 @@ module "vpc-routes" {
   tgw-ids             = module.transit-gateway.tgw-ids
   prefix-name-tag     = var.prefix-name-tag
 }
+
+output "VULNERABLE_APP_SERVER" {
+  value = module.vulnerable-vpc.instance_ips["vul-app-server"]
+}
+
+output "ATTACK_APP_SERVER" {
+  value = module.attack-vpc.instance_ips["att-app-server"]
+}
