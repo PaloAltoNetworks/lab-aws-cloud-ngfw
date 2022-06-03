@@ -1,8 +1,6 @@
 ![](https://lh6.googleusercontent.com/T15B4dD20gQj_ho4tGhpivHc_DCn2oKwJHUnYaVgPd097KMkhixUujaMt-hwUhRJor3ZYmx1Z6XP2fyh75m8Y61PsAzzqNlBenQl34gCniEUmqHeHpRi18mor345mpqavevJWh8kwqysd_3MIQ)
 
-**AWS CloudNGFW**
-
-**QwikLab Guide**
+# AWS CloudNGFW QwikLab Guide
 
 ![](https://lh4.googleusercontent.com/LFdpWNDx_-XdY5N1-bzPVqNucqDeViiYfZEdb7Ymj0Lnj34X0M6bIudeyOYe6bNpLOJ14aVO502Bext-7N9tC82QlXULuVpW7zWtvjOcnVYNMndccQLunfxkvw7x9un_MQgBchaucfc9B9oWwA)
 
