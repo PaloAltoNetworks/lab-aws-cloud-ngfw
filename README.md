@@ -143,7 +143,7 @@ It takes around a minute for cloudshell to launch and to get the prompt as shown
 
 5. After the cloudshell is launched we will start by cloning the following github repository
 ```
-git clone https&#x3A;//github.com/PaloAltoNetworks/lab-aws-cloud-ngfw.git
+git clone https://github.com/PaloAltoNetworks/lab-aws-cloud-ngfw.git
 ```
 
 ![](https://lh3.googleusercontent.com/IMT4Mg_BrvxLyuepCOnK7P0J9ShqNAzr_aRtjXdUlWCFEO_6g4D8SgrTIvNb1fLWDVbZdZV1XgTw6NTzQuiCBxa7nDomkDW-VSXIbnpxscZ9rTXgji1mrQLmw37yZMnLJ-qFq4WtdoyTGkclCA)
