@@ -108,6 +108,7 @@ On the AWS console,
 ![](https://lh5.googleusercontent.com/4vD_w5_QHVqtRrAU-kfx2rHFm7m4NFP07fISoSOj2aRDHYR3O4bZ3i3wlZQFImRBKfxoO5oxvkSYgQ6t70HqMWcwi_rn_18PsRWbUM6b4cni1GhJ1lVZYQT6oQ2WT3wHa01l16ME9KAW429Jcw)
 
 15. Click on ‘JSON’ tab
+
 ![](https://lh5.googleusercontent.com/_6rORcZsKrMehiSVKWy3cHMF-RQxO2tcsHtS6ImzOMEPO3aI1TvQRTy7gG6zyAsLwLK5yrPY_H_QcZexm_XLMMykb0AejpbiXHT-AG2TVQnD3CNzR64mAuzVntrCwFR5Uha_J2xXxMKCAGvsiA)
 
 16. Scroll down to the Deny policy and remove two lines (**line number 27** and **line number 36**) listed below
