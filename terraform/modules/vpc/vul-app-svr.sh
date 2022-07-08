@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Update hostname for better identification
+sudo hostname vul-app-server
+
 # Updating yum repositories
 sudo yum update -y
 
