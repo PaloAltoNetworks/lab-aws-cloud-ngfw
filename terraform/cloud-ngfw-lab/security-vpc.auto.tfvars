@@ -59,6 +59,16 @@ transit-gateway-routes = {
     route_table = "from-app-vpcs"
     vpc_name    = "sec-vpc"
     cidr_block  = "0.0.0.0/0"
+  },
+  "app-vpcs-to-vul-vpc-route" = {
+    route_table = "from-app-vpcs"
+    vpc_name    = "vul-vpc"
+    cidr_block  = "10.1.0.0/16"
+  },
+  "app-vpcs-to-att-vpc-route" = {
+    route_table = "from-app-vpcs"
+    vpc_name    = "att-vpc"
+    cidr_block  = "10.2.0.0/16"
   }
 }
 
