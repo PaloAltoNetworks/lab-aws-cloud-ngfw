@@ -1,15 +1,41 @@
-![](https://lh6.googleusercontent.com/T15B4dD20gQj_ho4tGhpivHc_DCn2oKwJHUnYaVgPd097KMkhixUujaMt-hwUhRJor3ZYmx1Z6XP2fyh75m8Y61PsAzzqNlBenQl34gCniEUmqHeHpRi18mor345mpqavevJWh8kwqysd_3MIQ)
+![](https://lh4.googleusercontent.com/18oAPNp1uzZ6qY6bJxg2fWYWUEV-pQzNa_dSAqSp2lEjdg4hlEyLlQYc1OAowXxSqrp5Bk9iXRYOu-mECiqSr-gzo56d8QAh97VrfTbwX4uYN2ABB8BKM9XZK2mSzSXDN3qeHzp8xRsNHmALdeNEPiw)
 
-![](https://lh4.googleusercontent.com/LFdpWNDx_-XdY5N1-bzPVqNucqDeViiYfZEdb7Ymj0Lnj34X0M6bIudeyOYe6bNpLOJ14aVO502Bext-7N9tC82QlXULuVpW7zWtvjOcnVYNMndccQLunfxkvw7x9un_MQgBchaucfc9B9oWwA)
+![](https://lh3.googleusercontent.com/_-_DS9VDmI1QhI68JOiMchoWH7Bo1fqYn0qbD9Y24KH1T1zAG272HQy7cetrLxw3buJYbJEcj7TMjxv0CeWt-z1p4a3hl1FrNKPMROVo6L42XLIWFkjw_yPGlVTzhcPz1v2IB2JCUXMrAl4p2n9kbnY)  
 
 # AWS CloudNGFW QwikLab Guide
+
+<br/><br/>
+
 # Overview
 
 The goal of this workshop is to take you through the experience of deploying the Palo Alto Networks CloudNGFW service on AWS to protect your Cloud Native Applications. This workshop will take you through the three step process of using the service - Subscribe, Deploy and Secure.
 
-As part of the workshop you will learn to deploy  the service on a centralized model and experience first hand how the service can protect your applications from attacks like the recent Log4J attack, out of the box.
+As part of the workshop you will learn to deploy the service on a centralized model and experience first hand how the service can protect your applications from attacks like the recent Log4J attack, out of the box.
 
-![](https://lh5.googleusercontent.com/Tojv_3OoKYcT5vY6Px2Q8lvG3Izvrud5w1h3JZJ3dNaqbzpZCMTW4yR5U0U2enwR31MT0L_ll_448I-z7fjOKax4MKdioXYuKqtaeI7dj6LtzdUNlT5iMRWOIPDI8WBkSXhJI5RJ5RtYx1m38w)
+![](https://lh6.googleusercontent.com/kXTNtrCakPvH2zDkMi0_yNysFKYB4gAtH2SoWT8TiPSJokTSeZnQRWvUUTFNNh2-8GvfQbN63VEp39jTu2TvKaCDJPCC0PBbcNyUcNxmPVeaD_QjlUjA8hnXJ-JGEYGrVVMJXxbKR4WXIip7Jb7xHlI)
+
+<br/><br/>
+
+# Environment Overview
+
+![](https://lh5.googleusercontent.com/VPI5mVmb-e4cxJbrKTTjRcL4ovKq8oLQ9T9fBKyAjBYqKBSIP1uIJxh5fTC6Lb9RPuAg2XNBBzgETdAyOAMuJv0NC4Ud_7gvrSCXzytIKBpLgEethf12RiyCBlnfwYduB1tJKYfgfeIeSNEsfBYB1M4)
+
+**Figure:** Hands on Lab Environment – Cloud NGFW
+
+For this workshop we have automated the deployment of the lab environment including the three VPC - Attack VPC, Vulnerable VPC and Security VPC, along with Transit Gateway and the attack and Vulnerable applications. This is achieved via Terraform, that you will be launching as part of the lab.
+
+<br/>
+
+## What You'll Do
+
+- Deploy the AWS resources required for the lab using Terraform
+- Follow the Subscribe-Deploy-Secure workflow to use Cloud NGFW Service to secure AWS applications
+- Use the default best practice policy on CloudNGFW to to protect your application against Log4j attack 
+- Gain end to end visibility on your application traffic with Cloudwatch
+
+<br/><br/>
+
+# Activity 0: Lab Setup
 
 ## What you'll need
 
@@ -21,108 +47,88 @@ To complete this lab, you'll need:
 - If your lab prompts you to log into the console, **use only the student account provided to you by the lab**. 
 - You would need to use your email ID to create the tenant. **Make sure that you are using the same email address that you used to register with qwiklab**. Ensure that you have access to the email address as the password reset email will be sent to that email address.
 
-## Start your lab
+In this activity, we will launch the lab environment. These are the steps that we will accomplish at this time.
 
-1. Launch the URL to the classroom. Click on ‘CloudNGFW’.
+1. Start the lab on your designated Qwiklab account.
+2. Login to the AWS Console using the provided credentials and set up IAM roles
+3. Deploy lab environment using Terraform
+4. Launch the Log4J attack on the unsecured environment.
 
-![](https://lh6.googleusercontent.com/ZGwO_-vtrEgebZv7AlAsTO0aBJqOirBSEgYjxssyT1HAUTx1qSQx4YAX3jCuJGnydxcOYwI1qAzIMppN0hbyVAyMxx7KK09SisYlTQJI2bYfFgCMX6AIVT5pYVgmK-Ruojlva0o1Q7ZkjHQIbw)
+<br/>
 
-2. On the Qwiklab environment, Click on _Start Lab_ Button to start the lab.
+## Start the lab
 
-![](https://lh3.googleusercontent.com/yU9kOUZhR04GiA5w1v48C1IqrIN9E2CcnmThutPQAzewj15iou67URYRng2LRN5K1PvzG6xeVlJ4xrokwiDr5tErIaSWiH96851R8UD11zhSynyCl8onZqO8tBGDgRg_fVfucArHUMJYCnRzVA)
+1. Once you login to [paloaltonetworks.qwiklabs.com](https://paloaltonetworks.qwiklabs.com/), the Home page should display the Labs that you have access to. Identify and click on the Lab that says "_Cloud NGFW_".
+
+![](https://lh4.googleusercontent.com/_bsbMB9jVUzncgrQkx7AR0v34dkG0p1XYiigiVaWyCp-gP-qTBzrzs41YbhN2osEtpPWW0_XwdO7Eujb6yZnBwsWbTt15yupmnunliEZotJvsK2OY-kq2vFulD-7KXCLoYq4-KDZxrtanMjyBGHATfc)
+
+2. On the page that opens up, click on _AWS CloudNGFW_.
+
+![](https://lh4.googleusercontent.com/_nV6ev5z26rKIzYS-PHXlwAh7iF0LVePRa4K3RwvtHNduPqgjGHtWLmsEspNBfbyGUTXkdDOtk4-9qExCX-MHfC4a138RYrQQQgS8wA_FLZMl8tqmp9k3ZbvgZS6sGs-fAlvJmgkufT5UkavWT1Xocs)
+
+3. On the Qwiklab environment, Click on _Start Lab_ Button to start the lab.
+
+![](https://lh5.googleusercontent.com/0r1NgpSFO3Q92__VLByEVi6rEqERc7oEWnm1t2C57YTvCS8zHqWLxoRgQ0SqRhZKiMpz8aatT1gK7GN0BUwhT1wBgFU-nhZ_N6zLEZH5KOmlHgiQCmwbn5W1Y5dUERHc66Z5CazBw_20y9opHD8JLWk)
 
 At this point, Qwiklabs will build an AWS account for you. In order to access the EC2 application instances via SSH in your environment, you will be using keys generated by Qwiklabs. There are two types of keys generated; PEM and PPK keys.
 
-3. If you are on a MAC, you will be using ‘Terminal’ to connect to the devices via SSH. For this, click on the “Download PEM” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.pem”.
-   1. Make sure to note the location where the file is downloaded. On a Mac, by default, it will be downloaded to “/Users/&lt;username>/Downloads” 
-   
-   ![](https://lh3.googleusercontent.com/MxyZTDrzKuPapUezxyeqN4JvZQduc_OzXO0Z1eoItjgC3Nv8UbHSffyNLNkk9lYvUwDG-nPiAEeuEWhWLAUp0yD3wPszny_EeTxCqyCs3wO5AfEazXpLFzZx2x_O0kYU4yAdzVBaf6y5ho3N8A)
+4. If you are on a Mac system, you will be using ‘Terminal’ to connect to the devices via SSH. For this, click on the “Download PEM” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.pem”.
+5. If you are using a Windows laptop to access this lab, you will need to have a SSH application like PuTTY installed. In this case, click on the “Download PPK” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.ppk”.
+6. Make sure to note the location where the file is downloaded. On a Mac, by default, it should be downloaded to “/Users/&lt;username>/Downloads”.
 
-4. If you are using a windows laptop to access this lab, you will need to have a ssh application like PuTTY installed. 
-   1. In this case, click on the “Download PPK” link. This will download a file named “qwikLABS-L\*\*\*\*\*-\*\*\*\*\*.ppk”.
+![](https://lh4.googleusercontent.com/oczonF_OFF2aIoAFIBjgrslmESuA-9jOQbzItN1SeX7y2C7W7eZja5iRrfMhcMGjtW3ab6h0QXbN7G0ApQLo-dSdRtIRnM1qAIqalzXZ_OwGNvUVTmS-cp-4nwSNU68EiRSJ2aZVKaZQOSc_0LreUgA)
 
-   ![](https://lh5.googleusercontent.com/G7sTqM_Dm0GqznYONEvzy8UIdsjvuP2PmHV0Ngwf3s2WMGh2cDztXbsodAnReqj30-fQdP_RPX27rWse0-bsQGNXfe0q868QH9dXtZ71mBlptgXyEIUpuFNlD-ptNvQHX-kdSoBA5Wdd3a8e1Q)
+7. To login to the AWS environment, right click on “Open Console’ and “Open link in Incognito window” for Chrome-based browsers. For other browsers, use the appropriate option to open the AWS Console in a new private tab.
 
-5. To login to the AWS environment, right click on “Open Console’ and “Open link in Incognito window” for Chrome-based browsers. For other browsers, use the appropriate option to open the AWS Console in a new private tab.
+![](https://lh5.googleusercontent.com/l0z9C_m__jhWFNGZqHCSj43rR8MvhJt3wwiyaWpW2_tJ8G10fMs-nbJ8vfe4_j5JVN6idaXp2dy569l_Y0q2rBCo95NZY-PtkzGB2jbouip8QK8LlVZA1lYPXSazCLFLMHFWBGR4cyYIG3IlFN-NKnM)
 
-![](https://lh5.googleusercontent.com/fVOs-rOQo-PTqPZZFM4jJ8J7GBY_u0O6Rr5kLws_lU_sM5jtN9a1SiSyBL3gpTl3OrFGx0iquOz-cb01mH1SuRoeagC7JVuW5DMJQsgzAsZgAAHArDwUm__iOf8IFTvX6ODkqJ7n_5JZ8tUF_A)
+8. On the AWS Console, copy over the IAM username and password from the previous tab.
 
-6. On the AWS Console, copy over the IAM username and password from the previous tab.
+![](https://lh5.googleusercontent.com/HCDajRVoMVEKo-otytgg1uNZ647qBara8D8bMdLf2rz-eqJ2U0fNx6Uiazk1epf1o2lWdfTTAafdbSSib_vHvj0i9ZBDlyU-BFdjf08Ef-kWTTgKpnEH0UScV2LfQm3vFc2WEpSAqs61jJ7_jbY8CAw)![](https://lh5.googleusercontent.com/7hKDaNW9P8e_l15slkTp_ljAsYD6i7VvXnff4LTikLd2O_d6NV2Oppn3l_MpB9O4Pi5EAUG7UMdxLoJIGYv5Otk3qR0Cr3tNO8ueZyg7jK79PRZe3GSKLweTfvtMDcimfCxvY-BfmHxt0ZjFwi7sz2U)
 
-![](https://lh6.googleusercontent.com/AeKCbzInqNs77c91LD9w-HXWjtbHj9d8v9DXEIR4ZdZ5jqRIqNHtIadv4Dwmd0xLt5Iacugpfuj-yLWkSXKR4rAQgCXKUXFMl4IqJcYr5JWNDd1g4D6Y2CGgaPsl3C_Syg6ezdCST7-rREcoRg)![](https://lh6.googleusercontent.com/uQWwneffR4gBuEmt33nCPiTZ5Gby6nhfVzBkLPt2RPlW4cOLoEbpKYtfMs7PS1xFkvcpoFvAVDfTVDsHvK4Sp5fMHo8pLdG1fTASAkJKwPv_zXXZ9WQHCavySBgnqfx_5tCSlD21AOm7XzQHlQ)
+9. Now, click on “Sign In”.
 
-7. Now, click on “Sign In”.
-
-![](https://lh4.googleusercontent.com/6fs0mifjQN4AsiOo9reaOweg1tUClAIU8SW_05wPOs2WyGrs7Gh65jOn532LQ3N6ULsBc6sT7dtKLjxBZPfY6y9LlEWeuOVr4TtEEEdcwRu-ypbHXSpTheStKIUgfbn26KM_Yz5SbuK3GIW2Xg)
+![](https://lh5.googleusercontent.com/g2_-28J7hIMcxOYMUTBee0YUULU0YT3ss5qQ8PKkAKIlk6EZFn1t8wY_IRxE7pAGQBeD32OWl0TBtvwpsLrb4jneHNnvSDpVr7g-U1Ea_t_HPCoCmT2zkCGPGzI0niEizA5xaOud7zFEl-zrIL9rDy4)
 
 Once you are successfully logged in, you will land on the AWS Management Console.
 
-![](https://lh6.googleusercontent.com/F4oa8a4qDpZmqZhJpYQBBK818emDSYX4eCfktiKysrO_Ii2NnLJt5dug3PdpTKHSn6sn_I-XXa53RS6tPNOdVhCGJIpcFXwUYLc5fI39XcqVwBdTi3b36iBXbAAkPrmJdxWSH4gp5Flu8lt4kQ)
+![](https://lh4.googleusercontent.com/mV30KneSuSeHTgOsL6EAtbYo2MfxWfB1_5Qf4h2oKEEpfyJpBk1zL_b6U3TR3Vh7Ho8LFVDgnn4VeB_QDX8oWe4rABbaxtEOF9yHBEiPY84gDYFqVNZU0QNDMV6DDrsTF2rrC4p7Vf9NTCPNXbE6--0)
 
 **Figure:** The AWS Management Console
 
-# Application Environment Overview
-
-![](https://lh3.googleusercontent.com/asF_ymeOiPullm2HHu6jCkDYnQNfeER4i5tD8Rn1Qs8CsLxqgPdUSiwSFNYoTCjs1MgpP59KVXGk_3iv3bUKnQKzGoHcg1JJ8QjdRBXw5AS4VIhRBPFDhgjeDBtxWZtjbzePtOroeojvsCWkZA)
-
-**Figure:** Hands on Lab Environment – Cloud NGFW
-
-## Environment Overview
-
-For this workshop we have automated the deployment of the lab  environment including the three VPC - Attack VPC, Vulnerable VPC and Security VPC, along with Transit Gateway and the attack and Vulnerable applications. This is achieved via Terraform, that you will be launching as part of the lab.
-
-## What You'll Do
-
-- Follow the Subscribe-Deploy-Secure workflow to use Cloud NGFW Service to secure AWS applications
-- Use the default best practice policy on CloudNGFW to to protect your application against Log4j attack 
-- Gain end to end visibility on your application traffic with Cloudwatch
-
-# Activity 1: Subscribe
-
-In this section we will first get the AWS lab environment ready. 
-
-## Overview
-
-- Edit permissions for the QwikLab user – This is required to allow the QwikLab user “_awsstudent_” to access the **CloudShell** and **Marketplace** services on AWS. By default, the access to these services is denied.
-- Build the Lab Environment using **Terraform** – All the AWS resources required for this lab will be deployed through Terraform.
-- Subscribe to the Cloud NGFW service in the AWS Marketplace.
-- Create a Tenant Administrator – A **Tenant Administrator** is required to be able to add AWS Accounts and Users for accessing the Cloud NGFW service.
-- Login/Change Password – Initial Tenant Administrator account setup.
-- Add AWS account – Once the Tenant Administrator has been registered and logged in, the AWS account to be monitored must be added to the service.
+<br/>
 
 ## Set up AWS Account permissions
 
 As mentioned earlier, the Qwiklab user account, by default, does not have the permissions to AWS Marketplace and CloudShell services, which are required for the purpose of this lab. We will now edit the permissions for the Qwiklab user account to provide access to those services.
 
-On the AWS console,
+10. On the AWS console, If you see a message for ‘new AWS console’, click on ‘switch now’
+11. On the search bar type ‘iam’.
+12. Click on the link to _IAM_. A new IAM dashboard window will open.
 
-8. If you see a message for ‘new AWS console’, click on ‘switch now’
-9. On the search bar type ‘iam’.
-10. Click on the link to _IAM_. A new IAM dashboard window will open.
+![](https://lh5.googleusercontent.com/IIC0WpHtWTVVGbH5tW3QfmuC1vZoLj0kd-ZgUBj1gwUlmqEDB5vV_jf8wx7AzofURz3sHoVuk1BTW63oQpSgqa-utDECA34_ra3Aa05eUhokDfKvOVOuDpfvLPYpNVRiubcntboax3hLjdqM5TYoHjA)
 
-![](https://lh5.googleusercontent.com/jn0dd4-od2h4dYo1bcawsGue5t5rbsVe90_EBmUyJIIYAl6Lse0aEw-1ER_3sJmJ0xp9EWOLco6AS5zvQCQf3Hx0xvJo9h0CNzKMvvjTn6-7wbMGuEmiFFA4jV9Mf5SZ4La-gKcUkduICtWOUg)
+13. Click on ‘2’ below users.
 
-11. Click on ‘2’ below users.
+![](https://lh4.googleusercontent.com/3XWAlRzPNTe8ZK6ZuKqz8XnLDFVGKmMLhUbqmEPu3XpFVYoi8C0BO7ftl25rFmb9X7uqbZlXKPmreMZVS4JNsm3xIGN4KTvbCLikrp8QyqSHlxJ1eCw-XmbMVIU8Aox9ciu1BfvIIWpHBVm6nuD11dk)
 
-![](https://lh3.googleusercontent.com/a-f_kgTBZYDiejysbO5onBGX61LStp91zRBtPuApslCF-mhMn2F-D-isBhfdGDKKP93l-rhZ4bF9uSJR5_7R3q0i2dyzvbXi4m6cu_zTjGAiUV1zuvwdVdqpRIez2OBJlG1Hl_oV1F7OaDsPzA)
+14. Click on ‘awsstudent’
 
-12. Click on ‘awsstudent’
+![](https://lh6.googleusercontent.com/oEZFlHVVh-Vp-VG3Z7XswxxcoufQ8Nyv7dNzEn0oPbAg-IYgLaOMk2YSWmP5XGcvVfjb9HW_n3J6ogPPEhjacsi9dubaDwstZRlwmG8rAWtWWhNANgtY-pF0uzD_h_4Ty7gko4mJGCa1RiXtCnApNOk)
 
-![](https://lh4.googleusercontent.com/GVqIdd-W99OIFg_MrdkxJs33vINfAu33KaU5_ltr21bZzmqxPIu_rT8iTfIcgdC1Hu2XDX8wim-uvmsEj3vtEFyBSxuKBBiNdmTRIz2TFcUm6xLQ_WAlh7yG_2MTO9AtqGvhpkRkWzWiZP3gfw)
+15. Expand the default policy by clicking on the small triangle icon against default_policy in the list.
 
-13. Expand the default policy by clicking on the small triangle icon against default_policy in the list.
+![](https://lh5.googleusercontent.com/AvZJN6qYrwNjFJ5wO9pwjlf08EylNzedeV-3q5xBTendIq9_fZvLZbNoUfe2PW_DOStnLUBMG9wVdlkPFZDPSvxi6HVx4KrcFkVbOEVV3znO7OHApkAfAUIS9M_PyrhALhs8p-GHCFa-k0SpuQs0utw)
 
-![](https://lh6.googleusercontent.com/cUjeHB9TNf3labv-kOJonqkLsJ1ieFJR71XK4yS-oKIG5NUi3M6R193oQsqXMPjnMGRfossVgwuZe_6C9nJQUty8xQd8-vAh8J3giADWug9eCR8PajdeOhzu-U3XayD4_h6SXqFxV9qjNcvVuQ)
+16. Click on the ‘Edit Policy’ button.
 
-14. Click on the ‘Edit Policy’ button.
+![](https://lh3.googleusercontent.com/d91ZwZVnsvPyivHluwhX-Er7RA95TSsmbqb8knyQCVKHfIuPE-tZkFik7MBGC5s0zhmAwv9X-2-zeMYFB4Ygvrs4nRywH8X9qPQ1-KbwQyQY7tlWHdtLlSCdH5L5qvyQejRLmDzVJMxSqPF_8Dax8DE)
 
-![](https://lh5.googleusercontent.com/4vD_w5_QHVqtRrAU-kfx2rHFm7m4NFP07fISoSOj2aRDHYR3O4bZ3i3wlZQFImRBKfxoO5oxvkSYgQ6t70HqMWcwi_rn_18PsRWbUM6b4cni1GhJ1lVZYQT6oQ2WT3wHa01l16ME9KAW429Jcw)
+17. Click on ‘JSON’ tab
 
-15. Click on ‘JSON’ tab
+![](https://lh3.googleusercontent.com/6pSt5bHbnK9fjM04C7wjJO_qWYIvqkmIgdaqGs4t0-BfXheTWDljGi3UV0IhAJmE3zWUy7Xa22CavXIgGnDQMgcTnXlSYq2lTm6PHPG35DoG732q9PKSa4OruEa_yt1TWLmuQln-_VOS_FT-B_OmQbE)
 
-![](https://lh5.googleusercontent.com/_6rORcZsKrMehiSVKWy3cHMF-RQxO2tcsHtS6ImzOMEPO3aI1TvQRTy7gG6zyAsLwLK5yrPY_H_QcZexm_XLMMykb0AejpbiXHT-AG2TVQnD3CNzR64mAuzVntrCwFR5Uha_J2xXxMKCAGvsiA)
-
-16. Scroll down to the Deny policy and remove two lines (**line number 27** and **line number 36**) listed below
+18. Scroll down to the Deny policy and remove two lines (**line number 27** and **line number 36**) listed below. Now, if we delete line number 27 first, all succeeding lines will move up one line, including line number 36 which has now become 35. To avoid confusion, **delete line number 36 first**.
 
 ```
 "aws-marketplace:\*ubscribe",
@@ -132,296 +138,466 @@ On the AWS console,
 
 Make sure to delete the whole line.
 
-![](https://lh4.googleusercontent.com/Vpg7Ob-vYnh5LYCG07tzRA7_TQzOEKX2SKoDhfMlyMttdEavGOlZh5-VAZqul0CBDHAf1vy-_AqkE2JAS2U53tKVLQTbMBwnACm6R5tDyxtdDaSAAlS8AJ4ycmOkV3xV5kIfrPW1kfHL4e87rg)
+![](https://lh3.googleusercontent.com/32M6yhm81zKln_h1fZYwO5RoHt2QiaDvdYGDIm3xZmN3Ij-rOlR1cjZZwYpEEGJnfXycDOwzIMD_-swf6ST396Ag2zXfm2xXzNe0tkevI0dOYoWDHJd_UpydNmP4QxFgHij4wiQoe4x9KmWPIdBF8L0)
 
-17. Click on ‘Review policy’ at the bottom of the screen
+19. Click on ‘Review policy’ at the bottom of the screen
 
-![](https://lh4.googleusercontent.com/mRfKbnCKcArFse0DWNE3WVPyA5oYEF19xlFAoTeQD0m44f0_EiMxdsmeZvxHZY_Q2MOaJGwCs6uh1E_KOgvPk_aqtWSeK9oNSuC6o1QPq7YMaezzxMRuLU4frLbTuEvWPsjs7GqiOK-TVY3PXA)
+![](https://lh3.googleusercontent.com/WePriienaj1aupaPvwvSqpOui2qgFni8ZNzupl1ZIo0bBH3rczEn2curUzpcY4C7NtFy7Z--01S1RknIUUYt9KKYsxR4V4ScaqNbOF2KBZe6eAoM2hNCjMqv2JN0MHOfHjZOxcomvwjk_fLGGgsp48E)
 
-18. On the next screen, click on ‘Save changes
+20. On the next screen, click on ‘Save changes’
 
-![](https://lh4.googleusercontent.com/8ChK55cxwuyiDzVH67YpUO8sNYVMlGxRFgBWFvHkyUZF4-N3TvZcTLbMejUcl0Y7757Yc84K1du95x1eSRxmWsLyDeOOGdeV4xQck9jYtTMwsL_8LRo49tVq3gVkz56t5GTfYz6JeeEjqOxNKw)
+![](https://lh3.googleusercontent.com/E6vjqzn6pD1YWTGsrjgCGrPhKko_5X-EPri6P7qfmnc0gIWg00iE9EaE4jgR_1BQktD68vi9Gxf6R0tO8iJXsTB6GwceYSSKxoMqV1Ghxi_1GHP6vYapFGJkzaapBbHKBeGkC6rG9fZPz-bB-MqP0_M)
 
-19. Account setup is now complete.
+21. Account setup is now complete.
+
+<br/>
 
 ## Launch lab environment
 
-In this section, we will deploy the AWS Cloud resources required for the purpose of this lab using Terraform. 
+In this section, we will deploy the AWS Cloud resources required for the purpose of this lab using Terraform.
 
-20. Click on ‘AWS’ on the top left hand corner to navigate to the primary console.
-21. Make sure that the region is N.Virginia.
+22. Click on ‘AWS’ on the top left hand corner to navigate to the primary console.
+23. Make sure that the region is N.Virginia.
 
-![](https://lh6.googleusercontent.com/5dErz7peXu-ul6PbeMDZvBbN_g8IuC5tWImwSQWxTfPj9Gf1OC8BoFkJTb1IKBlwFbTpU85zwMjGtcugYUE0I2WgpLYzYvsncX2k4siPPONVvBwNVqQPwApAme0m3kF7MQ19ktoJHlg2ZwGKYw)
+![](https://lh4.googleusercontent.com/17hvAgfiGMAi3ZDhTsf-4Aa8WV0Dbx2_pL13mV9VQLkX90ZG10g1gH_cWgUfpwztVw85TnG2DJ9KaDdnAUBH2BK2V8Og3vzJYeiaip4l2CqI-24rGyrG9p8c9RdzVYeVAWDDCATh194h7h-6rKaEq30)
 
-22. Launch Cloud shell using the icon on the top right side of the console
+24. Launch Cloud shell using the icon on the top right side of the console
 
-![](https://lh6.googleusercontent.com/Pemivwk9YSK2Cuh9sRJi7nuNAiQY0NR-U0NG3PMHbKffOo5Z2JzLNNRTxY4AJzXaBF8bDuF6cmpZKWpKB5AeE3X9gxL-tTXqsjTFpys8yYrd40jIGaXg6YmB1wh4FccDElEKtZ0W8ycmYof7ZQ)
+![](https://lh5.googleusercontent.com/SHIDJzgCIUHG7jzy3L2KmxM3paX9roN-cRa2UzO7yjpDONul_TF3Ejj-OZsxXoK2-mtrKcbu-Is4gHD1bmtyEolma1Ivq6rU86YeQJvkVfZ8d8UXhJ7YvCZoWTPGYFIpZMgWqtxZyYfP6vW7XJK07H0)
 
-23. Close out the welcome pop up.
+25. Close out the welcome pop up.
 
-![](https://lh3.googleusercontent.com/EbenPB0vTrqCA3oltn1_DlPSQlPF-7afn0DXjbmd0_h1T_ifw9oD3JoMWdod0D3x0AC7cXyucUwBvKcCbcBgQVuX8Dx9ho7jXhhXsTXISI8YIfCOXnNnqxOI093Q_ii_onXzedC6J9N1FTSJQw)
+![](https://lh3.googleusercontent.com/CMr4EgpUyiV9m2WYyH7VBmPCqBNV8pbLyIlgzzGBdbG0oRJLtUdIxaFG5jrJ6u2Jr1MOJ4Wxmq2I_UvdDexeIZxZmi2QVXOpMtnEYQ313_YFpzPnga5l_XOfC54f2AytFPAdGfmUR1CUEG_aFciEhj8)
 
 It takes around a minute for cloudshell to launch and to get the prompt as shown in the example below.
 
-24. After the cloudshell is launched we will start by cloning the following github repository
+26. After the cloudshell is launched, we will first ensure that the home directory is empty by running the below command.
+
+```
+rm -rf *
+```
+
+27. After the cloudshell is launched we will start by cloning the following github repository.
 
 ```
 git clone https://github.com/PaloAltoNetworks/lab-aws-cloud-ngfw.git
 ```
 
-![](https://lh6.googleusercontent.com/wN8s-n8H6gZeHjuc4m8oNQV-AU_rO0jiqiOYKjaTmLLyw7da9GNfauOy6P6_OsgSbE9LkulaboGYX12j2T_bCGpbStNOEobMPrIlGXXO4B0QXaY-NBw00M_DZgWBUztcgAYw4zYoUJc7-EXbuA)
+![](https://lh3.googleusercontent.com/qfnCh-7ezoy8s1XI_ciGI35-fRwO2nVS1aSZMGpmPMWYsQ2NoGmuRUXv2o2_7or3osoBc24QZO0c0He-4uYDRyM9sUJ4sZQyfrk5L8-Sa6fuHDECqw51gjkQ8dEPbJeUr9knPwRxCcd9KPqSid0lkVA)
 
 **Figure:** Example of cloning the GitHub repository
 
-25. Change current directory to git repositories’ root directory
+28. Change current directory to git repositories’ root directory
 
 ```
 cd lab-aws-cloud-ngfw
 ```
 
-![](https://lh3.googleusercontent.com/R1E12EOcKlE53Iayb27fMFeqt2PYCQH_ZQUosmQH6J4y1e_MrmaKvaPTwHyNqRV_nXtJX0Rtrm_HoQA5j8U1Zmkx-kiaLJ2t5G42-590xOxm8rXMT0Bc2zrwal4Zc3-vzVVSN3tn9l5g0459DQ)
+![](https://lh4.googleusercontent.com/cYS_YU2DIJfAzss3XcllJ3VVWPNKaOXYSKd21Wes_p5v52Zr4iNzxMmv1pnsiAB9rfE7_hwAZvRbIytw9-6ip-FVOTYP8uJshHI4Xpyk1a3cHEPTC2zhkoTI9kINK3cA-uAWn1dhYvC2PEe2wTyiLRc)
 
 **Figure:** Changing the current directory to the repository’s root directory.
 
-26. Run the setup script.
+29. Run the setup script.
 
 ```
 ./setup.sh
 ```
 
-It will take a few minutes  (**~5m** ) to deploy all the lab components. Status will be updated on the cloudshell console as deployment progresses.
+It will take a few minutes  (**~5 mins**) to deploy all the lab components. Status will be updated on the cloudshell console as deployment progresses.
 
-At the end of deployment, you should see the message “Apply complete!”
+At the end of deployment, you should see the message “Apply complete!”.
 
-![](https://lh3.googleusercontent.com/7qdJm5aa7sQweFROizfXQL3WsK1Igd5T0VEA25CdKjZ1IUyxRhgcxNWBThFxjer23z54LmHdyz9cG2EpiO3XWuOLG3782KOeKCyybReFSRZtk0wGFjBENErwl5NtuZTzHrdtV2NMSVfjlEX-1g)
+![](https://lh4.googleusercontent.com/xt5X4tbmUZTvJr6rL8FLekSzv4sFgGLbozWMvWlhRNEBBQgjzS50xKm3EjzyKi0jDsHI1bizaGUoAE_27cZQG753bb09qJJ6Vx-nlRDghsthrkraFICIqvLfKEy4zKBArCHql0ydjbqiBnH8FsFGyXk)
 
 **Figure:** Completion message of the Lab Setup script
 
 Please note the public IP addresses of the Attack App Server and the Vulnerable App Server. You will need to login to these servers later in the lab.
 
-![](https://lh4.googleusercontent.com/IyBZFX7B9xNQJJNF8tmPd_c5Lbcw5JFJkNOKjRSZnYUQ_Y8hfdBpJ_Nh6MU6WX1q9AAdwuPH_Jo2f-XMs6PwVNCTF0viKoEZvwxtkKkUijXJR_KLKH8W3XUUArCU4Td35caFmnQGfVPDOxNAdw)
+![](https://lh3.googleusercontent.com/sej6-whSsdJwSyi_ukbwO8_NOWPWeWkTIlxiK3Lms5e-UEDJpaHhSHP8IVgsbUH2dC8LXRDKYdIzs419UiATZFuwEN4Tcp8ywbr-pwZu_geFaUN0Ak_5GX5Yfd3U5MVDxlFJ7FFMfrBhdTfrvUsb2to)
 
 **Figure:** The Lab topology that is deployed using Terraform
+
+<br/>
+
+## Check the Connectivity between servers
+
+30. On the AWS Console, in the Search bar at the top of the page, type “EC2” and from the search results, click on EC2 to open the EC2 console.
+31. From the left menu, click on Instances and identify the instance with the name “**qwikLABS-vul-app-server**”. This is the Application server which will be the victim of the attack.
+32. Note the Public IP Address of the “**qwikLABS-vul-app-server**” instance.
+33. Also, identify and note the Public IP Address of the “**qwikLABS-att-app-server**” instance.
+
+![](https://lh6.googleusercontent.com/Z3XHTNq3D1HJe73rSP7TlrjhZAvlm3sYwGolDGYxqc3Q9exzfdUh2SEFEtsGhYKz_MKDRUmzAqyAtXNO1_a8dURyfarwciYwH8bGKmBsnGxLptldt4dslNe7YkhK82BLc3sz-lmaGL2RsvzAyMODeiU)
+
+34. On your terminal, identify the PEM or PPK file that you downloaded from the Qwiklabs console and update the permissions on the file to make it read-only. Check the example given below.
+
+```
+chmod 400 qwikLABS-xxxx-xxxx.pem
+```
+
+35. Login to both the vul-app and the att-app servers using the downloaded PEM or PPK file. Check the example below.
+
+```
+ssh -i <qwikLABS-xxxx-xxxx.pem> ec2-user@<public-ip-vul-app-server>
+```
+
+**IMPORTANT:** Note that the login username to be used is “**ec2-user**”.
+
+![](https://lh3.googleusercontent.com/O9G3r2JGwEiYz4JMX9JdpYHb1DBvfVgFGswG7J_B7Qwnyj9mIdJTX5SZgvPlzAhCnXHF5c1OAV1ioAnKAjX-wma4M2xldJO_1IPRSHgG35px7d8p71p9-nJzm4ToqoB5mKGObYH3CBwvreta1wNhZVU)
+
+36. If you are using PuTTY to connect to the servers, after opening the putty, 
+
+    - On the Category menu on the left, expand SSH and click on Auth.
+    - In the field to select the _Private key file for authentication_, browse for the downloaded PPK file and select it.
+    - Make sure that the file permissions on the PPK file is set to Read-Only.
+
+![](https://lh3.googleusercontent.com/AZ4MqC_uYuzCBoucLouOncwxgexCBvVm1XfkWMhYSOHf78vDXCLgG4fbViY-0ce2MJV2JEgBu986-4gnJHd2W6v21vxP4tisQawzUbF5cjLmnqkQBgepSIrXCQzvq2iry9zLaHMyxiqiajdamV6J5V8)
+
+- Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
+- Click “Open” to connect to the server.
+
+![](https://lh5.googleusercontent.com/vkzc1ZDh7ilp_yQi0iUIyILHHbM0vp_Y7ihTqRjrj0WoeTVVojyFmdZXD0e0qVwQhR82TjYRwlwAZq_HV5HNsY90jAGGW2QK6_cNnbpzJNBvsd-Wh_R2mM-hx4X9QsZskX33wErtIMJf0RAYd0OGGt0)
+
+37. Repeat the above steps to connect to the att-app server on a separate PuTTY session.
+
+<br/>
+
+## Setup the Vulnerable App Server
+
+38. On the **vul-app-server** command prompt, execute the command below. You should see the response output as shown in the figure below.
+
+```
+sudo docker container list -a
+```
+
+![](https://lh5.googleusercontent.com/PjSBjf8dmcB_28zk3sPjH2N1h1o-dfipPBcvf7dzUSS_2w985eQpGKea0VIU5Sk1nhuQ2W8uXr69yj-41X6v83s_mhnmumuRMzk1CBHP2cw-6KH9MU-cDkE_6IzFMnNxeyV_ihqTLjmvtQoQHX0uzRg)
+
+39. If you do not see “vul-app-1” container up or the command errors out, look at the troubleshooting session for instructions for manual start.
+40. If all is good, run the below command to update the “/etc/hosts” file to add an entry for the attack server.
+
+```
+sudo docker exec vul-app-1 /bin/sh -c 'echo "10.2.1.100    att-svr" >> /etc/hosts'
+```
+
+41. To verify the update of the hosts file, try to ping the att-app-server using the hostname provided. Press Ctrl+C to abort the ping.
+
+```
+sudo docker exec vul-app-1 /bin/sh -c 'ping att-svr'
+```
+
+![](https://lh4.googleusercontent.com/Seu_uSatSZljATtyOFpnf6tjqVYhpl7m8t5XpbgFa6dlaSOS39lkNcCBWISAJ0K9bxbhA6dCM2HMOEB9xSo6Lz8ysggxVVHWKqjVu7V3ku2tcd2j826KxIBj1XF6vhx9h984u72DFf-nLiqg0ywtc0k)
+
+<br/>
+
+## Launch the Log4J Attack
+
+42. On the **att-app-server** command prompt, execute this command to launch the Log4J attack.
+
+```
+/tmp/launch_attack.sh
+```
+
+43. You will get a “Hello, world!” message as a response indicating that the attack is successful.
+
+![](https://lh5.googleusercontent.com/klPplw5XUmQnL1TMsqX64x08w5a9WD8udr8EHg63AjJccuJ2IHP3tbNqwKAlLB7vXh1C9nYrwISYwiZfej0nQU5Hoz6CGR8NG2azRej-HbgujQlwQHkE5lvgMEvbbZxCyhMQvqMaDeFCtRYQIwt3d70)
+
+44. Switch context to the **vul-app-server** SSH session and use the following commands to connect to the **vul-app-1** container and view the ```/tmp``` directory. You will see that the vul-app server has been infected with malware.
+
+```
+sudo docker exec -it vul-app-1 /bin/sh
+```
+
+```
+ls -alrt /tmp
+```
+
+![](https://lh5.googleusercontent.com/wDXixyTsMKEro1mx9hXN4snqToRVgFDSRDY5Vqj8r1LJvgKb4oxJqUEwhv1yfCqQRp7I2918YGw4wgYlMKVU3VKcYNsqivFmw6n_GOO6kw36n0G6f0jroR9vfO1aUVzdmChvKev_lbyuHodgi8oInzQ)
+
+45. Let’s delete the malware-sample file for now, for our attack attempt post the configurations of CloudNGFW.
+
+```
+rm -f /tmp/malware-sample
+```
+
+<br/><br/>
+
+# Activity 2: Subscribe
+
+In this section we will first get the AWS lab environment ready. 
+
+## Overview
+
+- Subscribe to the Cloud NGFW service in the AWS Marketplace.
+- Create a Tenant Administrator – A **Tenant Administrator** is required to be able to add AWS Accounts and Users for accessing the Cloud NGFW service.
+- Login/Change Password – Initial Tenant Administrator account setup.
+- Add AWS account – Once the Tenant Administrator has been registered and logged in, the AWS account to be monitored must be added to the service.
+
+<br/>
 
 ## Subscribe to CloudNGFW
 
 We will now subscribe to Palo Alto Networks CloudNGFW service. Please follow the instructions listed below.
 
-27. Use the AWS link to navigate back to Console
+46. Use the AWS link to navigate back to Console
 
-![](https://lh5.googleusercontent.com/KKZvS0GMSF8gfso7WFMow3I6Jbk8Pt2nrim7Xa4QqW4pn1KfeNOwrpdVGb3Lp5px96wJoG01_-mfT8u5mLuyzd6GXskEWcCYCr0a69OpIZLdZEifQLTlejHE30wL4w3Kdqa7DTXDHl8pMxIuHA)
+![](https://lh6.googleusercontent.com/JcYCQtSel07lRKO61-hGLUPBNu_-lUcYs3gvVLHTbXcS23tIpF-tpOCw9vj14yzCqRRUMf32XcsjwOg4oxUCVWIgQu5ApXGbvdUmbCmoiDhffQckszlwhF0D-ip-uZyJ0U0pgxlinfjLQ9Ju8PkhB1I)
 
-28. Search for “marketplace” on the search window and click on ‘AWS Marketplace Subscriptions’
+47. Search for “marketplace” on the search window and click on ‘AWS Marketplace Subscriptions’
 
-![](https://lh5.googleusercontent.com/ao7rVPL6Zyl0jn445KyLX-SoLJe4R1_sdMWy_Shoynu_BkV-wBqCZ1IkXxn-s0TaLcNLlmx-fY87aGRAPGHpylBWTFnto2CRVidclAsu1Mqi2JeCNj4QMgDh9nhMwk0g_S5IHEIB_6JF0fbBxA)
+![](https://lh4.googleusercontent.com/TvKinl1Oc5NLMTiGebxMlvNRSIxVBKG0ESZ7YzZ0DIquP5x93GvLPIEa_yKIxR5q_TOgXS4LlwgQTFjHnrC7zMXJwUFWosrwzC5vJpg-uPWgd8DQgKYfMF3NlR-b4q0NU1Hp1h34mjkVZuvUtzyKr9w)
 
-29. Click on ‘Discover Products’  on the left hand menu.
+48. By default, you will land on the **Manage Subscriptions** page. Take a look at any existing subscriptions to see if the account is already subscribed to Palo Alto Networks CloudNGFW service.
+49. If you find that the account is already subscribed to Cloud NGFW, we would need to cancel the existing subscription before proceeding further. Click on **Manage** in the CloudNGFW box.
 
-![](https://lh6.googleusercontent.com/syOaXaZwVju4fTHxhK7YM2NNos5Dvf_V9KuGd5vT_f866IuCaBPRPFDCbbw_4lT38rVPQwxtKasfWd0b7qIar8c0rPJ_B77kSKcIYRBn9iRudLKjufWaYirlhBSt26hAin0Wa6s5039fvs5EHg)
+![](https://lh5.googleusercontent.com/50qYInXqaHI6NlSDgDH_fhagrpWcvjSsn1gAxk73Hip_ybkgaJLxcmEsGknHaZ0lvvKG9pPEaT5H_haQ1v6yowAFqRmD7c_XP2DlyMH5ZOMXJeGk1HV8Yyy8o-G94Md5-7hUGneInUrFrXiHvLOF9Tg)
 
-30. Search for ‘cloudngfw’ and from the search results that appear, click on the “Cloud NGFW Pay-As-You-Go” link.
+50. On the page that opens, find the section that says “Agreement 1” and click on the “Actions” in the same section.
 
-![](https://lh5.googleusercontent.com/V-UvKrYJe1BocfKNWLiJGNTy4jZXiL_W6UoQN3XrI2R3SXbIbM1-Fzxj6D4HCZdTSCYwB-pL1LHxa6OGFxI3aG9Zmwp_n_OKpbSYIKjo_5a5O5wQDBE68h53z7Ea0SD2P1NwhVJUgB5f2ztv6A)
+![](https://lh6.googleusercontent.com/OESfBB0nsTZDCF7iJS2GKVmrmh6Q_pRrudfraDFCFebbFW2at-KZbbp368-i8bCIZlboAYUf86SBLnoKiA46loxtmSUwefDFZmRpvxuDbroJN7Sc507jt7yo0b3oto4ECr0KGcHLMnsj4R3j0-w)
 
-31. Click on the ‘Subscribe’ button to start your subscription of Palo Alto CloudNGFW Service.
+51. From the list, select “Cancel Subscription” and on the popup that opens, Check the checkbox and Click on “Yes, cancel subscription”.
 
-![](https://lh4.googleusercontent.com/GQGO-P-HvwylQlqJB1iKgcN5-UpaL_YyfkGYCbMAd2mKy8dftMPgS6ANERHk_hC_8SIBs9hrM4b_rR_2RIljC_Z6iOvMfCWym3DsNTVJgNjs-6FvHvuzjS-8ToG4Mp2pd6fA_ximwiOo_fLcFw)
+![](https://lh4.googleusercontent.com/pWwgAsv6VgoR4gGOJnCmsCbIGkuprSZzY_H83p-Cv1G4mK1t88qZ__3uFBFqTQ6M5URc4RhoUVdk11LWj8p8BUxmgmuVbIUoIFwHsYOG8YeJo3rO9Wz5pkuBRVi44c0t9S7gazAVtV7qOrIJQqI)
 
-32. You can review the pricing details and click on ‘Subscribe’ to complete the process
 
-![](https://lh3.googleusercontent.com/Em4QmlO186RHlrtyrGEcW2dmIyrfFokhSkaTf7b0Zg35A8Uh34AnL7CS656xWHu6qPJbRV1-9JVTyxFEonL2oskoSiOEGK31dMf04lq_oZZGgQF3UDhKZjKVhQQBtCCuMcZfwLvDGLtLGHnLgg)
+52. Now, click on **Discover Products** on the left hand menu.
+
+![](https://lh3.googleusercontent.com/PgnR66jooEX04NanfDh1VYuoTl3ROfgcdxR7RlPzt4dgyyaw2m5PoroNoFLuHvmmeSj8zP138GMTJeRaJbFO7xFZFkCpASG7R712rHRkWcPEQF0nUlMFG6K0KBoyeLymLjWP1aQpW6MLovWENDKDvDQ)
+
+53. Search for ```cloudngfw``` and from the search results that appear, click on the **Cloud NGFW Pay-As-You-Go** link.
+
+![](https://lh6.googleusercontent.com/8mfHoKHtiCuspCrABjiM7FQuw0RPLgUlIKx78PG0wVAZZsUSap44CY8Hyj7ybWVLSvhfQ07NzpO6dFX6i3bMiallQC3iL_PDa4crzEszL1FoQSLiYuvRdEVtwvZ49B-EoK9y6QcZxyNOhqL4Cg5r72k)
+
+54. Click on the **Subscribe** button to start your subscription of Palo Alto CloudNGFW Service.
+
+![](https://lh4.googleusercontent.com/yEeEcQQDUZnnwrUbordgX6yxwcAkhbIH-KFar3DNI1G7b_LhaKqRb1N1cWEl6ipqmJU5S5kVkM1Il1EcZlRVIIJFYrWgQ8hZ5g8NWsZeWVonfLyHR7IBHU3THSJkXWQnt-LIS8mOx7WNhkGzYgZnXWc)
+
+55. You can review the pricing details and click on ‘Subscribe’ to complete the process
+
+![](https://lh5.googleusercontent.com/NOCSMV-ZQ54qQvAnYA0EYT4qfQU2BTPHrBiE1v4YnCwIHYQQ1RqxwqrT4vF58CSL316DvHxDQs5RvmPPBpAGKnMB2Oc1I9pcMIUq0vVGRo38mSPVj5c9Ke7AwTpVhc4Myn_AEFm2TcxD3mMrZZ9_nfs)
 
 **Note:** Since you are not using your own account for the subscription, you will not be charged for using the Cloud NGFW Service.
 
+<br/>
+
 ## Create a Tenant
 
-33. Once you have subscribed to the service, you will be prompted to navigate to CloudNGFW console to set up the account and complete the configuration. Click on “Set Up Your Account”
+56. Once you have subscribed to the service, you will be prompted to navigate to CloudNGFW console to set up the account and complete the configuration. Click on “Set Up Your Account”
 
-![](https://lh5.googleusercontent.com/ovhJ5DcmboY5LvynTmuw6PFk52Z0aqTcPdH_GEQ1vNYVKlzKDms2jEbL7UzdSg8q-rUc0c9KvWIFSkh_7Qtz1hrDDrvI7EEq69InUnpbtDLPbSEqrZVC-Qt6bz8hm6hPq8ii3wd-hwR8_tnVlg)
+![](https://lh6.googleusercontent.com/Ql5VyxcA50Ty_BRYWKqGY_NdPF2dU5cgD7Gyct7NTWYaZNA9wROHJc8L6Kx7KCS0JzzwTGKU4R2Dz2_UfsrUQuW4McWCQITwiwiX1JfVhgNPnu8YuJLCI9bf2k_DVm4Fo1nNzih_QSfbUMjUzLlOFUA)
 
-34. On the CloudNGFW console, start by creating a Tenant. Provide an email address, first and last name.
+57. On the CloudNGFW console, start by creating a Tenant. Provide an email address, first and last name.
 
-![](https://lh3.googleusercontent.com/dbtj-HcBV3_zK3BijonPnusyTqPMK3mi6bopvAKRlAgnKRcMvGer60DmVoqo8x2DeJ9jQmCNX0bmwcuXR-wBddXemIQFd0N1pfvZ6MK1PS-iRnoiQo-QqPpGt_Z3o88GxVozDR8SSE2hKlRYnA)
+![](https://lh5.googleusercontent.com/HbRDz8qAn1nagVvdLX78j4rBssVb3roEJp1qN76dgZevW3scm6HWOA6l6OYvVuB3wwy1h0q27c2cpbXlg2_9DdT6XPUl42J-c523G7hTKLpq2V8-AWPQ9gCDUx5RTClq_Yl03btV_aK8tA0g0a2yhJo)
 
 **Note:** Make sure that you use the SAME email address that you used to register with qwiklab.
 
-35. Once you click on Register, an email will be sent to your email address with temporary credentials. Sign in to you email account and check for email from _noreply-cloudngfw-aws@paloaltonetworks.com_
-36. Copy the temporary password provided in the email.
-37. Click on the link provided in the email to launch CloudNGFW console.
+58. Once you click on Register, an email will be sent to your email address with temporary credentials. Sign in to you email account and check for email from [noreply-cloudngfw-aws@paloaltonetworks.com](mailto:noreply-cloudngfw-aws@paloaltonetworks.com)
 
-![](https://lh4.googleusercontent.com/iyk7bnczUZafURH8p30qGhDkWCpzaI8BqsFLgoHdEL_PutAlB5B3ZpcjC4EFkEl7YzARiL_eBOKGChroqXxjHeY9WD9IJMrog81iQq_G5j21nJt5YbbP9_hDE3Pt_7cuA8Mk_Ey6Eda-y-6aEQ)
-
-**Figure:** Email received on registering with the AWS Cloud NGFW service
-
-38. Login using  the temporary password.
-
-![](https://lh5.googleusercontent.com/yXWklbNVxahP-OK4uhrb8qSCDcaB7mY4Xlt1mf7WklSeWMud46MYdmteLVmpwD5xq13Yn5gWwQvIzZ2QY7P6sl0JFHfVgJZL8onFDyUOB8E7iwTRj069g2mflAzzpXOtIMTNjrClNOJKTajbJg)
-
-39. You will be prompted to change your password. After you have set a new password click on ‘Create’
-
-![](https://lh4.googleusercontent.com/0yMKVS7latt7xNf15eSTqvfae3tCYXsWPeTw-3Fu_3qU1_1nckCSgy_JjdzYq0ktlV4IpmHKZN60TXh6zra_2UK0mIgGcCxjZfCn_kza6MnpA0AcNBjDqNeVJFYM2PDzDSSqFye1zSnqymJz6w)
-
-40. Click on ‘Login’ to log back into the console.
-
-![](https://lh4.googleusercontent.com/AahsitOVsMG3Rblk_sxMv6yFCLwbLJlqNpDT97pra3J7xhKawTd8pgXBQQBNVkSi-J1f0PDoQxAg5oLaSHHqi2KzKJFgiGJvG2IwxlKNHSHb5BYhkVAigS_oKqT0SHA8MxBqDYLLnC_3SpuS9A)
-
-41. You can also use the below link to login to the Cloud NGFW portal
+    - Copy the temporary password provided in the email.
+    - Click on the link provided in the email to launch CloudNGFW console.
+    - You can also use the below link to login to the Cloud NGFW portal
 
 <https://web.aws.cloudngfw.paloaltonetworks.com>
 
-![](https://lh3.googleusercontent.com/DVcVuOoYwavvi8bN4Z5eEjYzfvnAfM45pFhfAumsIVBFWKEzu-s687KBWSnS0UnX7U0pSgOrcmQfbO_LsEPVdTMeqSmRUjN_yaJGTeDv9NU_2lJIh8YeroboW_IDVzr20DCEOADjunCJWY1Syw)
+![](https://lh4.googleusercontent.com/kMtBVeyjsA6mvAHh7wmBJb6WQRuTi4CKs4Gbtfphk37KBMh1Tc9Bo_zLTBiKMsOAUHwTt8qwPwgd5Z09WgkHLhpWy-3ogB5jj4L5ifMC0pXlxjZLLdLDfbkcFVCkUpGqnghR6q5VXTj98ZCV5WgCzHo)
 
-42. This time use your new password to login. For support account, Select ‘No’ and Click on Next.
+**Figure:** Email received on registering with the AWS Cloud NGFW service
 
-![](https://lh3.googleusercontent.com/n7e5hiVPjIXg8DzbNLUR2cfi_3OGmDytQcaGk5HTXLccddqIKNJSPp6oNjKmxSk6GS6zwdQiJs-IPzN_CFY8vUwDPhwnUpRM-hMqvS6GZh0Ep-NtqYWr0CJb-0YUGswu2fvug4Xf5UXdpPRJcA)
+59. Login using the temporary password.
 
-43. Provide organization name and address. (Fill the mandatory fields)
+![](https://lh4.googleusercontent.com/pWP0Y6e7YNpvgyeDFp_PErCq1m91WTtN0cR_ThtlRYlPBMHVnfcos7iX41ocD5kVMJ1wE1eE1RfeWgbGFufP6eR-1oVjU5jWLeoXNHufR8dSY0miDMXa_jePCBbggvJcFZFSSSwsyhYoiUPS3AvgFxU)
 
-![](https://lh3.googleusercontent.com/Qx9hEhMW88ExJKixuia0ighZo4PAKJ8B4fw7n4OEo79_n1be8mszbhOZyR3XF-VuK6aTO_FHneQEAmMupv8XI2HURJjL4JXbTep8fPkaFQ_Ap_cU1okPdhrDHQiFpEmWaLp7flnzwOZ4_wu6fA)
+60. You will be prompted to change your password. After you have set a new password click on ‘Create’. This will take you to the Login page.
 
-44. Click the ‘Close’ button to finish creating the tenant.
+![](https://lh4.googleusercontent.com/DcY4HpPlnbaQ2ttjZA0aUU4kdpxODPV8EfHWjYiez_OurzRO6b60BkHac_lR_cOqreErLpNSHQBt2TUTCRf-vLYxhbEe_13511jT9xo8L-GMXb8GnL2I9lAvXzd2gm9UOCY4GBLnmwGZQBhZNpQvK_4)
 
-![](https://lh4.googleusercontent.com/2Jhua2R3teU_UNXCu9GXYD8HJRew_9RlzHfUTSmEq72zRKgLOHRDg4tmufLy_c4fY8Dc7GPxX11lcas266M8WmyawtzhTRDrHua6mdyJFO1ik4y6y3zbmEe99li9Fq9IAiD1G9JofCNFU2cqNw)
+61. This time use your new password to login. For the support account, Select ‘No’ and Click on Next.
+
+![](https://lh5.googleusercontent.com/P91R5KwH4nUSdmoT0M35lLR78oiIBBwXnBiBEez2GXZN_vL-kG4UKUo-fXi6o7q2_b_lUvLEIEzQSTNSKup80oGmHmHmLjnvs-u1f_u5XkZPGyMKVxx38D581yml2N-sUXGugJ8S3F23OL4cToW5S4w)
+
+62. Provide organization name and address. (Fill the mandatory fields)
+
+![](https://lh4.googleusercontent.com/Om_6s3x6zJVHups6bquSB1W8fDZOihZzo_MPq4Ji0dg_sBKvUXa92Lq3eGN1DlUlu_YgcNhsVNByUHZvb2mx2nGrr9Y69c_vN-p12KK2AuC5DiJy06vUQWxSpLVYVGo4TXbd9adDSs9lvIFsCvyABk8)
+
+63. Click the ‘Close’ button to finish creating the tenant.
+
+![](https://lh4.googleusercontent.com/pgnZWR0Hry2H9ZHnSjH0c61_DrBU9nUmxynr4zkuAHLIu-7xb2LpuPu7hkOlEjDbaT7hlUpWd6ufF0dOiGpm7fK7obTPfDrV1YdLB9dpb3JODhJyEkAh-tzarNu9ivaayr4TpFCk0ms-CxFarTGEG7Q)
+
+<br/>
 
 ## Add AWS account to the tenant
 
-45. On the CloudNGFW Console, navigate to ‘AWS Accounts’.
+64. On the CloudNGFW Console, navigate to ‘AWS Accounts’.
 
-![](https://lh3.googleusercontent.com/ll7sM53hAe1TsayluOalmIJ4dPX_HfwvXQd-Um_QuU8eCK3tH4NjYi6vjkI_M_sZ0ko7O93mdXQGp_GPJJ2D0uvDpyi7bumwSpR8lumxAYJB-mSE0wMpYsfWwSCl57FWqieYw06H5F63CC98Gw)
+![](https://lh5.googleusercontent.com/iZhEY-QdSF4YrXuaEok1UaicIJT0C7MH0XNVoxtVRh55uo5JfNJugiz5rkX53igWNh7dxo1b0gd5pByswHN5u8MZLfdtHVel7vsEluxpqm6iEspFSxk_n2sG2syYPEE55xX8FZcfhZazZu1iKF3KMwU)
 
-46. On the right top corner locate and click on “Add AWS Account”.
+65. On the right top corner locate and click on “Add AWS Account”.
 
-![](https://lh6.googleusercontent.com/UN-JyJizEPy1Bww7lOr4mXoUw6e73Y3RKUSCRG3X3eKzKKDDxboq3XEe7EBm4BD4M9Pdt9n_zTrAfhOirjyRCttcVWnrWf6L5bl6LAV4BmgpRpEH4DKtvzG12LOEmsOT__fg8VZ02JgJYfg45w)
+![](https://lh5.googleusercontent.com/sCejG6tifaHtwJp_DQG1rU6Coqdrh3XefMfDLFhgx4cVfJZpUUivHYC-dLcEx9egXu8o2hWhFljqh3oJAaX888L7WU_t_xEUJ9FWJUOxxIjzWzfk9WMouzZ23FPcOBM64TlGZ_Lb7j2MaLpNo66S8lA)
 
-47. Locate the tab that has the qwiklab console open and copy the AWS account.
+66. Locate the tab that has the qwiklab console open and copy the AWS account.
 
-![](https://lh4.googleusercontent.com/b-xRZviostaK16LOxoWRUhuIreG92uHzFMxcl7sl5w98AUnSFkVZMtOtfzQ-8-S6DwLoF8_sUk5Euno2ddvFEBFa_uAgeGwODuVcXHSXD1IV23SN7wNIe4QVNhKv5_QPsuPaGpdFJ9Wkv7F0DA)
+![](https://lh6.googleusercontent.com/lkgkETIGnenXUnoklvEX3qDbb2RTSlE2t656gyK4ohCiSzgdF-uHoo95Y6eMvHjUACG6TLYzX5wpPZz4MNc1L_1Q6InhMYhpaCeZu0_1eIsB1f2ibqhoqIPHOYxYkTX2EioXDLXwPMReyQQKYcKJGLQ)
 
-48. Back on the CloudNGFW console window, paste this account number.
+67. Back on the CloudNGFW console window, paste this account number.
 
-![](https://lh3.googleusercontent.com/tuRq9ri8qasz1Viol_cjNIZhw6c0RVQ8fq83hXBJMA8tIwAL8X50LMUUUDKcHpPJKP7kf6u6cPxtt2VrNsInKuEEaFPisBB_zS4uxxTLs9E1QaOOpqtJ-TQzQwHKBBR6m3N5gBDTWOsJSBnS7Q)
+![](https://lh3.googleusercontent.com/xIUwehjWOLTOTLmmUVo8aGcIsgvo2l1l8fslpPj2LHME0PEY7HvR6lf_9Gj9CFLiQP4GFgOYqE1hGaxQ3RVA4TVgHK6vpokHgp2AJ7pxM8WmJzcRlT1WRDjiPSxypTY99GddXOsDsm5-kB5NeOfn3jE)
 
-49. On the right side click on ‘Launch CloudFormation  Template’. This will launch the AWS CFT console.
+68. On the right side click on ‘Launch CloudFormation  Template’. This will launch the AWS CFT console.
 
-![](https://lh3.googleusercontent.com/20ofzgnm1R1KKFo5NLbDc2bpNpZfkzpWdBh030-0_oaQAotgAQ28hO11zc9TrTCEDmGu_X_50FFNZS8NQnXqtFPNAi8_OfmBZhV7mRHeZ7Yvqfskhd1ZdDyqrg1t86jKu69pYLHRyZWD9XtEmg)
+![](https://lh3.googleusercontent.com/j7G0CF0SnSBlRmqv3ePgByWhOFK2IiOdrECbqrqJTiFlDoi3LO-pJ-b3kpTctJmpdavEeIjCb2Q1xP6TZSEMiuTLwxt91npheb9yBGPeKkAkQ2qephhguUjtUMdCSF3nTt_0cMZheWygzAwtn2yRSfc)
 
-50. The “Stack name” field will be pre-populated with the value “PaloAltoNetworksCrossAccountRoleSetup”. This must be changed to something unique to avoid any conflicts. In the case of a conflict, you will see an error saying that the “Stack already exists”. 
+69. The “Stack name” field will be pre-populated with the value “PaloAltoNetworksCrossAccountRoleSetup”. This must be changed to something unique to avoid any conflicts. In the case of a conflict, you will see an error saying that the “Stack already exists”. 
 
-![](https://lh6.googleusercontent.com/p1vhPYwwKG2I2OrJxp64eFusS2O0ZHmu6vzdOp2vS6clThbMaOUkWKbsP1vnNje9c_dU71tiYiWh9XKh88lUx6A3MRpMpRCeFHOX66RorxCHXRkRNTyc7T50hmOSHdle4qlQiqiCd0u7UwVCEg)
+![](https://lh4.googleusercontent.com/cqOEsBOvSUhYlyTIBizp6gVKHYzltKeF8FSH2YqbSYgWbF_egzd3r359N3q5QIlHXGOynHii7vWybWvP6wjJnDjXzGwMi6ovjdqhPBUZ502Csayk4YDOvUgsDdg-66kqdly2Q3ZP9Z5ed6B-LZsV2LM)
 
-![](https://lh4.googleusercontent.com/rq3PPCe38l9bkYRzglldo1q_zUTPzwq3tzGaf4-orxRLlBWtwj2yTfO9Z6CxPYdgys69xYI3ZkbVq1WXyHUS5Fx9hWYdu0PXwH-wayCYcWnFnyCOeI8SeotW54K8IJemqR9Kql-c74d7xRuGNA)
+![](https://lh5.googleusercontent.com/jgTYb9KbJEFPnzeDoS1hVPXImcDFsZLjKK1NG2T-Y1Js1v52gXPHqZmLuF_8h5NnlvuvsLZy-OuEo9xcH86d_vVcTXHFzxbR7P7YPJCArRkvDdf2jrL1sdf0IYuyIWJdrU1_KKyTZJatZLLCnLIVfqY)
 
-51. For all other fields on the form, we will keep all default values.  Scroll to the end of the Form. 
+70. For all other fields on the form, we will keep all default values.  Scroll to the end of the Form. 
 
-Note the Cloudwatch log folder name **‘PaloAltoCloudNGFW’**. We will be using this later.
+**Note** the Cloudwatch log folder name **‘PaloAltoCloudNGFW’**. We will be using this later.
 
-52. Select the check box to acknowledge.
-53. Click on ‘Create Stack’
+71. Select the check box to acknowledge.
+72. Click on ‘Create Stack’
 
-![](https://lh4.googleusercontent.com/CfNYK2LB-stSzGgwkBokIzj4dah5p4VrdBQH7GxGAnX9F4u0ndwoD8nRjWQE55p-Y-VTCPDPQ9lKZYPC523FWmn1vJdZLocp4UmUFZHmv1gZkmT3jAK5aIHhW235Gq_pl-iA3nSkQk8mDiMpGw)
+![](https://lh4.googleusercontent.com/7gER7_QFTiEl4XyOniK4ZJW6e37mOolYA518xMNyO78DWwJxRrthIEX1uG-HLYid-JKqO7bm6xRF2pEVL_4HlBHVRD7vaWQ4gzDyW9T8fSEe1e4mPqn_hscoaI_QlGc_T26p0vtCEhTW3VWmDc5t8es)
 
-54. Monitor the CFT deployment to ensure that it is successful. You might need to refresh for the latest status.
+73. Monitor the CFT deployment to ensure that it is successful. You might need to refresh for the latest status.
 
-![](https://lh4.googleusercontent.com/ABLQXsayar4HKRQu8eYivitVRZhp4Av4_thteXU_3Sh2YoSDUhcPmDgqNYa_jKC3kJpzTby2JMVhzGsfJ6ZDr1_4BHeR0gyF_1u2fmFA8LWQnajp0m-PX8-Tv3SdZA-flBbjmeEIOgoTV0bFfA)
+![](https://lh5.googleusercontent.com/q3q-bbmWSYMFn1arI_z-0WDdaMD1hSDVNyrI0G1fcuk0hInbFuF-U77XLTnrVJJ-QxZtNQ25CsPOfTznUPMwp5es13b1cR7KEy7NAPZj2O-25xLJKzzm6ITBcjec4Y5ZT0GNev46VIFU9ScmQDNzo7Y)
 
-55. Now you have successfully subscribed to CloudNGFW service, created a tenant and associated your AWS account.
+74. Now you have successfully subscribed to CloudNGFW service, created a tenant and associated your AWS account.
+
+<br/><br/>
 
 # Activity 2: Deploy 
 
 In this section you will be deploying CloudNGFW service on your application environment to protect your application. You will 
 
 - Create a RuleStack
+- Create a Firewall Rule
 - Create a Cloudwatch Log Group
 - Deploy NGFW and Endpoints
 
+<br/>
+
 ## Create Rule Stack
 
-56. Navigate to the CloudNGFW console. If you are not already logged in, open the link below on the browser tab and enter the credentials that you used to register earlier. 
+75. Navigate to the CloudNGFW console. If you are not already logged in, open the link below on the browser tab and enter the credentials that you used to register earlier. 
 
 <https://web.aws.cloudngfw.paloaltonetworks.com/>
 
-57. Check that account addition has been successful.
+76. Check that account addition has been successful.
 
-![](https://lh4.googleusercontent.com/xZVopFa0g7eW0xRwOVk7jbVwMTARRyPxk0VS6GHehkfGFz0zuhwUbLewbmD7a-E4hsU_9gpN_jUgBb_kfWEKwkstwm1MgyM9Qd2IwQ6FoPBOCvg74khw_C3_LfPf1S8KtQ7TsUoHG7oU4v95TA)
+![](https://lh5.googleusercontent.com/O94-VkijkpzNiTl6jVl7HwaFghspy8k2DUKSNukzp2L_IDcrkK3Nx0sNA13JLqpTjPaXJ1Qv2W7F--1We322XOGyTrY2KBPl9DpoGXLT87HTH80r9Az1_N5OJVg6_O3qKF8pMqgnI9ef0Dib4KZ9SGs)
 
-58. Navigate to ‘Rulestacks’
+77. Navigate to ‘Rulestacks’
 
-![](https://lh3.googleusercontent.com/19845YhNh4LEaHlh9o_8ZBbRMmigPoo03bzVfgjC7eoVyCTLX9kUl4-BjRvLUuDRlc6S3izNBJ5j93gpZWeZAwcFVLNNfokcjOV8mA10mccJTeGlo4hcO4WMEYAx7XTx0aLJLsRkLvrgRWl5yA)
+![](https://lh6.googleusercontent.com/w8cpdoKDqRsEaSzhcbn-vQV4YTCWYTgv10NZ46cqqYfREsQXWFjUYZ9z-SOBqiIoDuv6ipCpqbDXLT-VUh2XCmiv-lHo9mlHCawWnvErz3I0UJq6z-KQyioZRN18w2eRBEGAana6A-ORpytJwwS4k5E)
 
-59. On the right top corner click on ‘Create Rulestack’ and ‘Local’
+78. On the right top corner click on ‘Create Rulestack’ and ‘Local’
 
-![](https://lh5.googleusercontent.com/LUgyQ0e7az6AaUNBVz7s8dF0I2WxMaKliOkCzXGbNNh1rHX9cNXbgWCc0wXKblSvZQrqkJGSEXW8fdb4I2SRhRGcTzY5FLmIFwH_wrKcF0RSLjoYDgGOelVZ99SFKH3qwrNYOr7zmbW7YHZPyw)
+![](https://lh6.googleusercontent.com/h-7G2hcK1kamyoTTDn4tgZ8Adk8TCwSWT00L_rBFUbQ0vTJLwiLbDcP_PZZCFtNR4dsNUdC2sQ98IcmHGgUEKk_U7GWqFX1D3dLE954nSmccSRrUXYu23aY0P34PUs1i4qYivMKwLD1V5ldqxJEm1mI)
 
-60. In the Create Local Rulestack form, 
-    1. Name the rule stack ‘Rulestack1’ 
-    2. Choose the AWS account from the dropdown.
-    3. Click ‘Save’
+79. In the Create Local Rulestack form, 
 
-61. Once the rule stack is created we need to commit the configuration. Click on the Rulestack name.
+    - Name the rule stack ‘Rulestack1’ 
+    - Choose the AWS account from the dropdown.
+    - Click ‘Save’
 
-![](https://lh3.googleusercontent.com/e9Jhrf0jH1d2GZ_DKjsMzkASkJzLTjCb7YClzXcFow0WCx0IiLb8-DzTFaZzhshr-1hlps-ZEkvu3beSpgYqMfXDSuUJBRprEzuGZTgzPUxGwMcmbINOeZHnG0vUcO5_Ot8RI9hlDXTA36aq7w)
+<br/>
 
-62. Navigate to the top right and using the dropdown next to ‘CONFIG ACTIONS’, select ‘Deploy Configuration’
+##  Create a Firewall Rule
 
-![](https://lh4.googleusercontent.com/ljwJu6XvDXSTeB7STDhEFFlsvr_JyHOQvCk9KWW4Stw5O_on9Vt7CulBl7N-frDPtEFzbgt3MEVroaoE19tdboIutJYiLW1IiycR9_pzzgvpWnn-gdUPA250vMFIhc_B7s1FeYntA4Tg0BdThQ)
+80. Navigate to Rulestack and click on ‘Rulestack1’
 
-63. Status changes to committing. You will see a pop up momentarily that the commit was successful.
+![](https://lh5.googleusercontent.com/VyhB6hAv8QO2H2bGa5jpDwY5LRyBo5A92qOSWCp0YGlnfTUaNaawJ8ty8fRA5uZh4AtH9tiul6S8HFASqjyj5I70RcsULOeqAXTtbaXEx1xXD3mI8d3jOHB6sZfPw3UggaC1B15aX4AImgG5yMr4naM)
 
-![](https://lh3.googleusercontent.com/CwGa0orap6LoIAl-j8wQ7txr069IuwOep_HgcgvzeJZW9FiNsfbCT8aOd4LpKaK9uHtk0jrrqz7l-3cNcY79jLWyFqTwINifBgPlP0S-_8lrWfC_Uro-8x68P1i6O-DoK0v35tO-NVmDcFOp7Q)
+81. On the Rulestack page, click on the ‘Rules’ tab and click ln ‘CREATE”
 
-64. The Rulestack creation is completed.
+![](https://lh6.googleusercontent.com/-a3a9hbzZvlfuLGzuRZPA3tPLvU3QLbat6dLB_IxtSQEFPH7b5Pi8jbOUzfB8pS4dKX3cdWpADt8yH2EspkLa0Qc4TuzYNUl3urWSyYUJbO0TVM8MBYG8ozP4MmV6JtYbTc5oy76cmbp_NefR18aGis)
+
+82. We will now create a rule that allows all traffic, but applies security best practices through _Security Profiles_. In the General section of the Create Rule Form,
+
+    - Name the rule ‘MyFirstCloudNGFWRule’
+    - Set the Rule Priority to 1
+    - In the Source and Destination section of the Create Rule Form, leave Source and Destination values as ‘any’
+
+![](https://lh3.googleusercontent.com/H4mr3MQYwT4VZH6tXbuMwivBZzSJK6ZPJtbolwzLtvPrUL0WEksOnoHFToq2w4A140lM1bJ5YwFLHmbPfpn1UrZSoZFt6tYDPWmd-MCNQWl-UvotdX-VtIQgV0UUaHUC5BIdYqxcRQT7RxBuWL_I0H4)
+
+83. Scroll down to the Granular Controls section of the Create Rule Form. 
+    - Set the “Protocols and Ports” value to ‘Any’.
+    - In the Action section, set the value to “Allow” and click the checkbox to enable Logging.
+    - Click ‘Save’.
+
+![](https://lh5.googleusercontent.com/nGcNSDS5ZUyw80kvrPoVLd139wJZpVifBitWvaEL6_k5vuljkEY02TKlFSxRi6CTDkXHKXuMBsxUpLotkJgSVlsioao732eGQOPMTQm93yvosVGp85D6rr67XUZOxGcKWPKhrxBqavrd9tj96Tt81sc)
+
+84. Navigate to the top right and using the dropdown next to ‘CONFIG ACTIONS’, select ‘Deploy Configuration’
+
+![](https://lh3.googleusercontent.com/ssuUl2ZKsSyQV9kNwbQb6cmKgtnN-OGKo4JmuLyJckNJN7QOeHsKS77bGCKI5X2BNhjQYSmld-UwwK-gw3uPCcxkrRgcWpsz7zlR97iyBpvq_aDxNSbdoh9OyD77_qS5uYXJ8BwEJ8ndY4YdyUfHn2g)
+
+85. Status changes to committing. You will see a pop up momentarily that the commit was successful.
+
+![](https://lh4.googleusercontent.com/q8s25kdtTa9XgZad3E27BNh5C4MNvmdXyC96SkqTUbWEK-jVtBLethV5Trb-WNwMcq_SRytY7T9UMQlTuC7X26zHrSij6d0mq9RNR-lfaHn4DRV52GszJKGSfAM4IlODnxIzAYXjYZs1gd-3q6O46cw)
+
+86. The Rulestack creation is completed.
+
+<br/>
 
 ## Deploy CloudNGFW and create endpoint
 
 We will now deploy the cloudNGFW service on the security VPC. The security VPC along with the Application and attack VPCs were provisioned using terraform.
 
-65. Navigate to the AWS Console browser tab. Search for VPC and click on VPC.
+87. Navigate to the AWS Console browser tab. Search for VPC and click on VPC.
 
-![](https://lh4.googleusercontent.com/bYKV5hKi3L_I-D9FsbOeWYzwD6ZIO4vGD8MligTXvqIbnBgVfDdORVQ2r8J2HXWJ_S_VP8hi8G5S4M1APOk3W5JdK3NrnkkdtH7w-JWi8Sq9VYV_WCt1xbfXWosrzpy5aPzemnPM1K8KuU2fEg)
+![](https://lh5.googleusercontent.com/f6NaKV8jP8-tfmYt58waa1V2Fi_svl7_0grK2RcLc5uvC7CWKU1pPBzscENXFhz4LOAPHuOTA0ejgCJn-u-wobLyvDj9q2ikKjuhnMrQzfEc5_39MZW6X6I6eI8J1fo-DsvHL5ZriH5jKHzoBZ6JWgs)
 
-66. Review the services that are already provisioned. Click on the ‘4’ against VPC to list the 4 VPC created.
+88. Review the services that are already provisioned. Click on the ‘4’ against VPC to list the 4 VPC created.
 
 Note that the name of the security VPC is “**qwikLABS-sec-vpc**”. We will be deploying the CLoudNGFW endpoint here. 
 
-![](https://lh6.googleusercontent.com/jJsv6uetRg20Q8KO2iv3wi9IhGsAqEXBQ1YatbPst_ga6RgvC74ke1d4Q2xd1RLhUnyNviETY-gKB9kmT1SfzWPsZEBHkXe2kd7bbfd57M_FMImNse2It0zvnNAEr9aSiSXaSPztc-P1HwUKow)
+![](https://lh6.googleusercontent.com/7tMlPgcQZuDsWBdM9gN3K0eePLq5p2yYiSjTvzDyn2oZ0QRLsXaUnmgwyDyGHIwHc05LZMbkZ_DtqgL_T1n1XM81ZKxPpPZ03o4TXxXYfuwRfy-zgOeCzFBPymRLfQxexTtyIlRCJiBIxRLH3l05WGY)
 
-![](https://lh5.googleusercontent.com/T7SFdXJPVo1ARO3vQmx8qzn9dgwLklCbSBWtceg1GUMWVTT057yVZqQNDrzjaKnZgmnRhF_86dnOzUMdIv5dNe82-QeJEQYu_lmqGz2jaOiCEPAUddpb-nwqoCliMBUlh1MwllB1zYtA_C3OHA)
+![](https://lh5.googleusercontent.com/2xBafpO_71yrBVEXamRxw_RlfgY_RMCSv5l5f_1GSvo4dx_SWNhcAFk4FhFhm0MlxhkZxiy0vvE21GHCI-O1ZIwc3ekkFVUe3DbrQGc3q4wnWZjlobGIKC0urj_xuuaz_ZsQzSbh-rRGcrK_NCgatpY)
 
-67. Navigate back to the Cloud NGFW browser tab and from the left vertical menu select ‘NGFWs’
+89. Navigate back to the Cloud NGFW browser tab and from the left vertical menu select ‘NGFWs’
 
-![](https://lh4.googleusercontent.com/ulEhDc5RsuTjeWn1zrnR1xJRSF3c6CG5_U4DQyIpzWHBOpHxkX_o3jkQG3GLrMTD7ezdzX4A5ddW3LpogHg3gptQVdwj9ZeEQCTtvT0ErsoYQcSg9mSFzCG8yt-I_LPoZ_nI7uJvp27N1VyerQ)
+![](https://lh6.googleusercontent.com/e3xdnYSNGxU7cd45aU0jEbBE1T2GhviXHXCdlID2_qMTpx9-LLIuNOKuq6U8nUdYZNC2noyVxksiVkj4a3QLrhd3AS-qqvqQbZnP5D585JtP_wHKdiU3P6JHY63SDE0MCppExEvzQA4B_xzZ6N3wHBo)
 
-68. On the top right, click on ‘Create Firewall’
+90. On the top right, click on **Create Firewall**
 
-![](https://lh3.googleusercontent.com/N6wKfHL0wdWC_OIaZgVMjZZif6IVL1SICFuEYUORa7c97emrhkfPrebm85ullUjg1SGEZHN2KloM2H73yWz-iPgZsGr87LiJzgBUQiHto6QhPD3XEUZkUlix1BoTj6OP4I-VcSzgVXlIEKFxLg)
+![](https://lh6.googleusercontent.com/_shcZlc-v4mJ_Ne1TBDku-ll2Q41zwt4j6LsCl1Rze1vnyN7Nh_BHoApWB7HsEPFllSxHsMAWITxsgKkUwe3MUHWeuAwrfPzJ28P__k2w0D6jDL9aiWrYSy11wjIGAZZaP20swZITGG3blP_Z11tLPU)
 
-69. In the General section of the Create Firewall form, 
-    1. Name your CloudNGFW instance ‘MyfirstCloudNGFW’
-    2. Select your AWS account
-    3. Set VPC to ‘qwikLABS-sec-vpc’
+91. In the General section of the Create Firewall form, 
+    - Name your CloudNGFW instance ‘MyfirstCloudNGFW’
+    - Select your AWS account
+    - Set VPC to ‘qwikLABS-sec-vpc’
 
-![](https://lh4.googleusercontent.com/scTJ7IQjUlKvQFWMiwUAs5XWY6-pTKgd16ZUjAmKTDcd2xVf0FCVhYI2ti8R4SVZ-JU02fKWmNhjnjuNtR4EM33uTDMxeCPUtQhAQdGWRklDran4qhSulfpMpLNjuLphnoxuxMFLPdcsE3Pbnw)
+![](https://lh6.googleusercontent.com/uG9ZgL_QXrT5_DE3XcE6pM-7mYdODtzB5M2cwvMbpXPCjZ5Wif3x6XR8W6ftBT1P_E-TejLNiVn83prSHt10tIv_YQAyTuD3-ds64mh0GmeYnfVyHg8x0_AGBxAUnVAWNuU73gk2rBEaGnFeiG0eXbM)
 
-70. In the Rulestack section of the Create Firewall form,
-    1. Set Rulestack to ‘Rulestack1’ from dropdown
-    2. Say yes to create endpoint
-    3. Select qwikLABS-sec-vpc-subnet
+92. In the **Rulestacks** and **AWS Availability Zones \& Subnets** sections of the Create Firewall form,
+    - Set Rulestack to ‘Rulestack1’ from dropdown
+    - Say yes to create endpoint
+    - Select qwikLABS-sec-vpc-subnet
+    - Click ‘Save’
 
-71. Click ‘Save’
+![](https://lh3.googleusercontent.com/3FNRuH-ns-vaczaub_Qd6f1x8X15U5tPy8_o_rPbuNTYr2o23iJyrrD6nCbCa3cEA6xJcKl5dnuYxdpHR8iqfFaqBHpKkY4u90HFzZelLK-2Ex8JHE2OSxpRnnai78WPCO6iEBIi115H4G2DWpCZEYU)
 
-![](https://lh5.googleusercontent.com/gYCgQzIzYG1QPMZKPASHhqwjSHoHMarJ5liI4uo7vWI_GlP-rClu0mM8og3KufLrsxTTcmj-Lbo8_clpYCYEJGRErFU4LJpClqwMV6WEfCVbnqq5EWOr2aTVVy36ZCB5rtuK8KDTjUxvQrpFjw)
+![](https://lh3.googleusercontent.com/SfwzOJqInWrZSIN2gc2U1n2F1yFwXXnL2lV-cl9hTzsNeKrSgpcpzy5FTffTHCErY5TYhUZ4IVvbZhFnWUF92ReMuqM3jQ7KCCV4EIUM8_R3uB3rrKRt8mkzLYmK9pP1UT4n71hyczOWuYUFF1WaasI)
 
-![](https://lh6.googleusercontent.com/-lLTTTAH_jHF3WIloTWq5F7Z8G1HrdtEIucBQwX6qcGFBk6xr6IbVdpjbSFLA2DqH4L8u7WMSxdy47kWeEEv_r18vtvqhXaHlhfnwj5QNJoRxJcpOlJdx19rc8BI6oT-IAO-XZO11l6P8y9ZqQ)
+93. You have initiated deployment of CloudNGFW in the Qwiklab environment. The deployment will take around 10-15 mins to complete successfully.
 
-72. You have initiated deployment of CloudNGFW in our environment.
+<br/><br/>
 
 # Activity 3: Secure
 
 In this session we will be creating firewall policies and experience how the best practice default profiles give you protection against threats like Log4J.
 
+<br/>
+
 ## Overview
 
-- Create Firewall Rules to secure the traffic
+- Configure Logging
 - Route traffic from the Application and Attack VPCs to the Firewall through the Endpoint created in the Security VPC.
 - Check connectivity between the Application and the Attack servers.
 - Launch the attack from the Attack server to the Application
@@ -432,318 +608,229 @@ In this session we will be creating firewall policies and experience how the bes
 
 **Note:** Before you begin this activity, review the CloudNFGW deployment status. The status of the deployment should be CREATE_COMPLETE.  
 
-![](https://lh5.googleusercontent.com/euw83rdSEvzSwYyKbtwBOulNDor4ox6ccAsEF_y01HKdtutMb9QtUKATPj3KhidSA2XiYIuyQPPBuXp0cjxFSc4LfHn3KqOinoHhppmDbROJXponoO4JsQ93A6nRcoofpnz9oRoZM97Xi9ryDw)
+![](https://lh4.googleusercontent.com/WEydPHcOYpyRBkqRmyomO06Dd1-6UfkCFdrUyym_YslfsgaYUBYBGzA9TIlvRfF2zC-9phcdI0iP9NdVkPbdXzbLzLXwKEDsi7bpnOABZx0Ui5DCXgEWDIyx7nPzBV78ARRY0dEHwM9r2Js8bfkXUGY)
 
 **Figure:** Cloud NGFW Deployment Status
 
-## Create Firewall Rule
+<br/>
 
-73. Navigate to Rulestack and click on ‘Rulestack1’
+## Configure Logging
 
-![](https://lh3.googleusercontent.com/Oo7z5ZWjBToZJtTUPJJ_Gd2Rk1DiV8Y7aqDxKjDuGYIxUod1rfdMfLFouet43qyN0TrJwgXtHvnBKVm2-dCyW44dLfA-5Tv1mKmHrDcUzQzxLCCrPDkc2k4Twv0U7bOnV5Ho1X8H3tUGx0gi0Q)
+94. Navigate to the AWS console browser tab. In the Search bar at the top, type “cloudwatch” and from the search results, click on ‘CloudWatch’.
 
-74. Click on the ‘Rules’ tab and click ln 'CREATE'
+![](https://lh6.googleusercontent.com/A6eaatDWB6kc2Ej8f0-y-tWOZL-cD-Ws0FSudRS8lA2nlhCSug0xTsGcvv_ZGNmgLrBPKynU4bZ58u1Zn9e5jlZ6p2hPHU1BUF0cO9eqh5nNgm2bBzDcWW7Ca3dR7wtDfx7y1MZSwi8Nx_gAoKgoJlw)
 
-![](https://lh6.googleusercontent.com/63fZhENFjuxjq5AIEN6mAN_LvXx6ha4SknjdWL_s39ExQw_THHozBICj_El820-KIcVpZks3CIs_gXn_U2rNgY_gD3ML2W7zfhv5qzHvRcLbe-WeLuL1hdMRfqVxXLZ0TsgjkRwsPp3P1fFQaQ)
+95. On the left menu, expand ‘Logs’ and click on ‘Log groups’. 
+96. Navigate to right top corner and click on ‘Create log group’
 
-75. We will now create a rule to allow all traffic. In the General section of the Create Rule Form,
-    1. Name the rule ‘Allow-ALL’
-    2. Set the Rule Priority to 1
+![](https://lh3.googleusercontent.com/jM-mzkwDqyOiY1wHX7qhMlXvcQViYovTEuDmczkouSeEzJAFYu5MJEkLFJzmaWY6uHHWrSPeTUjThRSfjYAb32WlP0iwzbxQQZRuRLeYHk7GCfsRr1l47KZNszLlXis3Lite06CTAIUHjHLnrSPqjb4)
 
-76. In the Source and Destination section of the Create Rule Form, leave Source and Destination values as ‘any’
+97. Set the log group name to **‘PaloAltoCloudNGFW’**. Note the name should match exactly in case. Click on ‘Create’.
 
-![](https://lh5.googleusercontent.com/WIqJkHtUrcNaw3RQIw65c3RMnW2sS7pYD8ZgAlDlt6LArwWIAkkxNZXlaJvPNucP5rWH2wYVTF_Z5FS4goqIdNVK8uf4XqNrb-65UcxTX-IpHjs75HR2cs_JjtvriTzRk60M-zDZUc1ZahflIw)
+![](https://lh6.googleusercontent.com/eQNt09fjAJoRNc6NPf7rsc3GRKSeMb7-e7sKq8fSCWgnzqx62VURXbyZu5rpXFjnnf5myYZeUDeo8eEp_LcPiouh5ScorocvqP361fdHYsPsK3ts_xmYxvt4GkTyef0Y8jGADz-ssME6cWsjuSYEgRk)
 
-77. Scroll down to the Granular Controls section. Set the “Protocols and Ports” value to ‘Any’.
-78. In the Action section, set the value to “Allow” and click the checkbox to enable Logging.
-79. Click ‘save’.
+![](https://lh5.googleusercontent.com/6d0wpPqG_9I1T7uT3H9W1_NCsTIa16QA2rkDGcAk9bIoWF_w9b3E7Ifl0ltycFFW6EoqpVfGhhQpFmzwA_OAFYIcYNsnCJauxdz_hi1xXP2x2nEScifr45b35Y6pSBWdTrzIT_jXdhzD0xEBLmg9Lxs)
 
-![](https://lh4.googleusercontent.com/5aok9Rjuf0DQBEp8_WORyNlyzH2jjBxqsAIgrc7dHj_HpYPiXgTVM6I8TWFAOeEBLps0thHtQyiFSTCne4dC_CkvdpweUuESqpet5efRrbh8fpojfqO7PXTH1jujOa5s1Z17kItb7fIgv6JLtg)
+98. Navigate back to the CloudNGFW console.
+99. Click on NGFWs and ‘myfirstCloudNGFW’
 
-## Configure Security Profiles.
+![](https://lh6.googleusercontent.com/PyfY5bolfUkyMAV18E_sFqwfyDN_oO_IlxX6vL7LYZ9m9foj5LNM6_sICCL56ZpgoJ4j8uk8CVtmp_UCPqkxg5dDOgzoVqH84Bmb-n3CVFQ31YlJAUO-W4NIp_6YMuyq1zWt-MVlrtMdoNuJIPxwpL8)
 
-80. Navigate to the ‘Security Profiles’ tab.
+100. Navigate to the ‘Log Settings’ tab. In the Log Type section,
+      - Select checkboxes against **TRAFFIC** and **THREAT**.
+      - Select the Log Destination Type as Cloudwatch Log Group and type in ‘PaloAltoCloudNGFW’ as Log Destination. Note that this is the CloudWatch Log Group that you just created.
 
-![](https://lh3.googleusercontent.com/OoCvWZ1UY9vNXiQ67AbXRC_zsliAcDoTLtgIR68H2ikZzq8Hsep7qplFU7Vv1A66XgwKd0iHNVYptZjZQDazpuVOHotldDZ23kQD304WTmvDDbuPIaXQxK8h52Qatsz_seZkHiiF4Lbe_W1p0Q)
+![](https://lh4.googleusercontent.com/67LibvC4daSqzyJdvvXNKIQ2MS7YDPo4kPlZGlCVHy6nR2F32pIeu8D99FfgoR-vXkiXbVSOegkzTFA4_X8srRUvTZNC9A-6bfM5noVpSEppPSZUoBO9pn--2DVcd8ftB6xm46UEa7CbLNV43AAv7G8)
 
-By default ‘Best practice’ protection is enabled for security profiles. In this lab we will start by disabling these profiles for IPS, Anti-Spyware, Antivirus and File Blocking.
+101. Navigate to the ‘Threat’ tab and do the same. Click save.
 
-81. In the IPS Vulnerability box, Click on the arrow next to ‘Best Practice’ and select ‘Disabled’.
+![](https://lh4.googleusercontent.com/n57JuoBPVCDCocMdI3qftzfAXf7qyd-mlpZVo1yDotcKXhfi-ZURJKcXAu2YSsnn1nrfY-eIIcFf6PDOasQi_De8ltDJFHZvSv0OE9y8UsKfNqPZsStu8YUxAZ6DiQk4j8vTw4iYq6tudeDMEMtolm8)
 
-![](https://lh3.googleusercontent.com/b7Raimp4t72qiFrVATVuFoEcKSg4NNqwb3mim_PQ24xeV-1urMaVMekFRRg_hU8nFFDdBJ1cVn4Y61s91ZreXv8XDo4m_Y1J_4pHg7rZ1_tiSPjyVh6txixnx3j3BNxM9D-UEJaHhW6Uk77rqg)
-
-82. Repeat this for Anti-Spyware, Antivirus and File Blocking.
-83. Once completed, the security profiles should look like this.
-
-![](https://lh6.googleusercontent.com/qI3hq7glpUW-xsOCVlyAasPZ2-QEw3icNUMSOQL7W_YT-DkRIwaU1caox5YF9G741BiQODBVx3YUoBVnPi-heDiomlvj8Q3ArIbYNFoitRfwbpfZ2C-AzTZE6uoo5dxNxh5jBDdCyUmxnUr94Q)
-
-84. Save the configuration by navigating to the bottom of the page.
-
-![](https://lh4.googleusercontent.com/g0CB2AOc0APlWQT39evPg2CNcjzHQfs1uNGak3lW-NVd1QUW6HvZR-m9QOEWwx3pTRkcV3sfJZKpP523WNnyHoSlXnf5c0_Z-gWVjA33j3c85nyxj_XLKU53B_WuN73YLiAr1N4rqi8o9Df9eA)
-
-85. Once save is complete select the rule and from the ‘CONFIG ACTIONS’ use ‘Deploy Configuration’
-    1. Click on the dropdown arrow next to ‘CONFIG ACTIONS’
-    2. Click on ‘Deploy Configuration’
-
-![](https://lh5.googleusercontent.com/Y9DWUOJMf-kiBPtvitTqa7GxQPKM7PiLPNPJNNe8JZH1kz7boDhjMdGaNNCIR5bCG89gt5OK1cKIBlQKCqb83Fwn3wCzG5170QrStSSgpkSM5LC61NmHHhNr45gwI20GkX-tT1YvIDVtC-BBAg)
-
-86. Commit status will change to ‘Pending’ and then ‘Success’
-
-![](https://lh3.googleusercontent.com/llqQAslZH3lJj2M9REYOKs04TVWIObTC3BO8MBwpCixrbcIrK2MT1j0ipNSgGmd0AlZz-UCZF6o-ht4p7fUkM3h1Ho5S50D9VaAOJ2VFqeNWYurVMOsrL_j3urraCpCi_Fl97kzccfeDnQlaWQ)
-## Configure logging
-
-87. Navigate to the AWS console browser tab. In the Search bar at the top, type “cloudwatch” and from the search results, click on ‘CloudWatch’.
-
-![](https://lh4.googleusercontent.com/XT-eiVcuZp0zwPeJhcvZWgpUGTAupMpG4alQ0RKpF7BBm6kl29dcwbcIQx3m8bXiXZmG_buZZ2IYZHSO-nXfT0AcOfJvC2d-THoAZDxuezmK2UxL83OjfmewDsWUqvVecjdI9unpw1LeHhA1XA)
-
-88. On the left menu, expand ‘Logs’ and click on ‘Log groups’. 
-89. Navigate to right top corner and click on ‘Create log group’
-
-![](https://lh5.googleusercontent.com/0fYweYuSMYCIUInhBSGaQpv9jUZTjlf1wf9IjdkgkFDahk3EoVvP1ju0AngeIucmJMsC2PFBVUYjcp-pXPPn_HIY36g17MNluaWtL3LbtogEUWyjlt71Xr8pvX9ezvIA4jHpzrFU2gwdO0BbyQ)
-
-90. Set the log group name to **‘PaloAltoCloudNGFW’**. Note the name should match exactly in case. Click on ‘Create’
-
-![](https://lh6.googleusercontent.com/Cl_IsyVg4HwhEFPU29RNagkwgt-K7M_nki3Dw0ZQ8ZIvEleZKv5RyVReFNS41S6Q5RJ8mjWuijaC8FS1dH4PKU7PufskGdXng1FdBxzYIEzm6UmUYu74mzmkORavMQLLMrm5MTi62_8XjRSYYA)
-
-![](https://lh4.googleusercontent.com/OV4Qo-sjQiRPsi7qj5FHznvJh6QzM5ub7B8milRSQUqYzkrFwL6PcfFBFixsa9HZI7ARJY5rSWdFcvhPPaZ6huFCIOUZAvHVLN93dYVSiLoU23ZrcV_T7JWxdADWm2KEspj5HluyNKg254-gmQ)
-
-91. Navigate back to the CloudNGFW console.
-92. Click on NGFWs and ‘myfirstCloudNGFW’
-
-![](https://lh5.googleusercontent.com/sySZXxocVcIMjxObCi8aRTxqNP1UGmstCTsek5GfMdSAEe91t12aoxP9Vt99WTtaIEH5qI282G9BnTy7zB8eGJ7CwP3ss0YbK4tNbetKEEMX7g8vMS7v0FyNeWJZKYlT8iFgFnBEUn3AtzjZDQ)
-
-93. Navigate to the ‘Log Settings’ tab. In the Log Type section,
-    1. Select checkboxes against TRAFFIC  and THREAT.
-    2. Select the Log Destination Type as Cloudwatch Log Group and type in ‘PaloAltoCloudNGFW’ as Log Destination. Note that this is the CloudWatch Log Group that you just created.
-
-![](https://lh3.googleusercontent.com/ygEPRtsxYOFvHIIyGguY6BXSUIi9_pKjRTC-Bnm9XDcv7N7vRlf1dqlQWVPwMUdycz35_QflPMX881ZP7NkU9EWaAxQJ8eu5Ik3lMYy73IUnPp_Jr2ESF4Q56GoTpuBYaOtMzvI3MMp1gio4YA)
-
-94. Navigate to the ‘Threat’ tab and do the same. Click save.
-
-![](https://lh4.googleusercontent.com/n6pci41wxLMDXCieEgTVVA5Sd4tyChNQJ2Gp4GACVHi6iXDY-iIdg8qFcWSaz4gW4haC67_7adEe7M0mf6XIqp3ce96WkIfs-CbV8h0Au17GGRSYbJEUBlyxxEElu32lQxYWLI85dmuo-1_-_g)
+<br/>
 
 ## Route Traffic to Firewall
 
-95. Navigate to the AWS Console browser tab. 
-96. In the Search bar at the top of the page, type “vpc” and click on VPC from the search results.
-97. In the left menu on the VPC console, click on Route tables. 
+102. Navigate to the AWS Console browser tab. 
+103. In the Search bar at the top of the page, type “vpc” and click on VPC from the search results.
+104. In the left menu on the VPC console, click on _Transit gateway route tables_.
 
-![](https://lh4.googleusercontent.com/Vh2I5xq6vyO3WLv8cC89doM2MuLuBrPRv_QKZpp-wPZIugMC3LQhE_d5Ufk27NIqK6OsnhUZ1JwFA_MRC6IOwwlQVVgc1lw5HbvZ_TrmxV3uZtHVC-BBH08mxpYivStBc3EsOua57cOCDE8sPA)
+![](https://lh4.googleusercontent.com/8qmKOSisKTvPOk7IsFsaedVPxoNxt6VFhEF8UYrvLfRNqJGEBDCucwYk8UHbBsiQYcaFAVqKxPJRvZJ3aVL6WXIna8ACKgY3n8roAdp4okLOP66pBTn1KhnGoglddeaSAuWVp0L2nPM-TRv_zH3YPJ4)
 
-98. From the list of Route Tables, identify the route table with the name “**qwikLABS-sec-vpc-tgw-rt**” and click on the Route Table ID corresponding to it.
-99. In the Routes section of the selected Route Table, click on “Edit Routes”.
+105. From the list of Transit gateway route tables, identify the route table with the name “**qwikLABS-from-app-vpcs**” and click on the _Transit gateway route table ID_ corresponding to it.
+106. Navigate to the _Routes_ tab, from the route table, select the static routes to the app servers and delete them one by one. Basically, we are deleting the direct static routes that allow East-West traffic between the app servers . This is because we want to route the East-West traffic between the app servers via the Cloud NGFW. 
 
-![](https://lh3.googleusercontent.com/n2TtE7zrVxBK8r8W8ic9b4h_mmd8JPEY9GDs8BfiDaM6heX5iyuHHrW9-q9IHP01H8L89NCJf7hMTEBKoL9SqV0UdUSnm7VLn6xwHLEKX3PnxvQYRFS8OC39pmk0DKe_3ao_ZvwrbayDWh6gzg)
+![](https://lh5.googleusercontent.com/E9YucgxamVIKaN_HNSv25OeMAC3MukReTzen1Nch6B6_-QnJ22LvSmkyEp1Qvyk06wKKFT89TChXP02yUQtilLlMgkeSmGAFpOYIBz77CFmvt_MMybIhdlcsuWqZgkSRSapVm6xXcx3c0P5PbTnRB1k)
 
-100. Add a route with destination 0.0.0.0/0. 
-101. In the Target field, select the GWLB (Gateway Load Balancer) Endpoint created by CloudNGFW.
-102. Save changes
+107. Once that’s done, again in the left menu on the VPC console, click on Route Tables. 
 
-![](https://lh5.googleusercontent.com/d-nOi2s65msf_byCv8fF1bLdJ4Ey6LLuMTGDtaRvJoAXJvRLg40lEx2b7BYPA_7PLPD-YfEvvnVvurDdWgiWfsMyACg0prOl_1o7CdBxhzw-SoieMXQ1jvm_Tpd7KjI78v8TqZh1O8b9u7dtLg)
+![](https://lh4.googleusercontent.com/qtl-niPTp7VtlIGCiFBIWNwGPQaO2ayjKA2zUoRfwORQ0P6dX6mgxHdsIPke8_Retvt_GvYtsiV9dnZkjHasFXBFdB5LhQKBrpHClkkKd2_PiidNtPbYTFle-5KCxaq47hQk-KlIXPdA1D2JDJYU-vU)
 
-## Check the Connectivity between servers
+108. From the list of Route Tables, identify the route table with the name “**qwikLABS-sec-vpc-tgw-rt**” and click on the Route Table ID corresponding to it.
+109. In the _Routes_ section of the selected Route Table, click on _Edit Routes_.
 
-103. On the AWS Console, in the Search bar at the top of the page, type “EC2” and from the search results, click on EC2 to open the EC2 console.
-104. From the left menu, click on Instances and identify the instance with the name “**qwikLABS-vul-app-server**”. This is the Application server which will be the victim of the attack.
-105. Note the Public IP Address of the “**qwikLABS-vul-app-server**” instance.
-106. Also, identify and note the Public IP Address of the “**qwikLABS-att-app-server**” instance.
+![](https://lh5.googleusercontent.com/zM8COgFlSva4fyLEMPgdyAFRkhVB41Uc8-RhkNRSPYK1R8owszNZJFmw4JAL8_f_TLhvfRY6l5q8uUwKqiu7gmAjdaLE1G1aZL-cvFWtVzV85KHr8NofuugcyF8N9liiRs84lLIPwTCHyVdKL0ac0qY)
 
-![](https://lh6.googleusercontent.com/X_1afekedLL787DmJcldiWkDDDIj2ZfNp0Yv8sj0kntQrOHjaUgEB2mvIVqHvym1NqGSRPdw4KYLTVDajwsGhajDv_o6u2nGr_c9hpLWpGZoyr_vhHwGxBHJYCxLTDkJ0qIWFEl6ZM7rLLhmrg)
+110. On the _Edit Routes_ page, 
+     - add a route with destination 0.0.0.0/0. 
+     - In the Target field, select the GWLB (Gateway Load Balancer) Endpoint created by CloudNGFW.
+     - Save changes
 
-107. On your terminal, identify the PEM or PPK file that you downloaded from the Qwiklabs console and update the permissions on the file to make it read-only. Check the example given below.
+![](https://lh5.googleusercontent.com/S4BlXjQP5RYMIGuvIkX3__-X7vSN6nYPaapj5iV8g0KmG2YNcmSefP_i3Xgn_r9V1hbJv9TxLiLYVeAELmjL-JJzO2mNCs7LYDOeOdAIlFmrDTHGBy7sN6I-BRGRh9CTduNOLbWSBD1HfoWELjr6DUk)
 
-```
-chmod 400 qwikLABS-xxxx-xxxx.pem
-```
+<br/>
 
-108. Login to both the vul-app and the att-app servers using the downloaded PEM or PPK file. Check the example below.
+## Launch the Log4J Attack
 
-```
-ssh -i <qwikLABS-xxxx.pem> ec2-user@<public-ip-att-app>
-```
-
-**IMPORTANT:** Note that the login username to be used is “**ec2-user**”.
-
-![](https://lh3.googleusercontent.com/r-elNNPvodzqUoRU88CPIBjwhWeE5ubNDUAAQTHWGfc2mPNNwtSxvIWYZDAX7OaEoJhD9uCypgoJml0WO8Ns_HZXBINZFnRvqs-hFzCBJ9N08Ne9OO-OERLgxAB6hk-cXbF1mMFXASr0HJQq9w)
-
-109. If you are using PuTTY to connect to the servers, after opening the putty, 
-    1. On the Category menu on the left, expand SSH and click on Auth.
-    2. In the field to select the Private key file for authentication, browse for the downloaded PPK file and select it.
-
-    ![](https://lh4.googleusercontent.com/zc-zDGFKoZ3OPngvwRZsez0mRxVxIsgHpLU6rUt2865nYSMwp9LBqHkKfFTFdBhBzWs0MfIW8Q_xMpVvYZcqaBUWtRI0J8Nbj3lZtQm7QepkES8Kf8V_fS9gnaOvUmfPUid4uYOfbiTfnwr0ig)
-
-    3. Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
-    4. Click “Open” to connect to the server.
-
-    ![](https://lh3.googleusercontent.com/3bKoUSofklNQHCdP5poLlQ5MPlVLzYKmOm2mpu8L9WWF8-izfo8pkbPfdyBmn07QOD4p4Az6_XaSIh6L3Cg_1qwGiv4FDAQuN8HWS9K-zwY42s-aTL_RSBm4PvK9Q5YEvXDV6WDxHuSUs9cFAA)
-
-110. Repeat the above steps to connect to the att-app server on a separate PuTTY session.
-
-## Setup the Vulnerable App Server
-
-111. On the **vul-app-server** command prompt, execute the command below. You should see the response output as shown in the figure below.
-
-```
-sudo docker container list -a
-```
-
-![](https://lh4.googleusercontent.com/FmoGe1aHMFTKAzX8yLsX5rlZ2x1-OxGa8v4PFJgVEj9Z18T6wZCv1ehmZabONMRnphJR_NtfYkfx8hXUIKOfov7uB-lmDtE03YzhydE6b2-YCli7ouEwbGYSgOcZyzvBc1g2KY3NHix_qRt-8Q)
-
-112. If you do not see “vul-app-1” container up or the command errors out, look at the troubleshooting session for instructions for manual start.
-113. If all is good, run the below command to update the “/etc/hosts” file to add an entry for the attack server.
-
-```
-sudo docker exec -it vul-app-1 /bin/sh -c 'echo "10.2.1.100    att-svr" >> /etc/hosts'
-```
-
-114. To verify the update of the hosts file, try to ping the att-app-server using the hostname provided
-
-```
-sudo docker exec -it vul-app-1 /bin/sh -c 'ping att-svr'
-```
-
-![](https://lh4.googleusercontent.com/DIY2g_civg3VKNXMWzPz_yTVNxl_0rQd9v_lwIIxo-wzZ4ny7gq4v8HPQcAgoHg8vUQcvbtFJcyuSnu0nXAYDLdHUZ2UUSdUKjo0GGAVUCpD1mLvc7urm42ifNBWvkkzmCw_v9I54XHEOvIhQw)
-
-
-## Launch Log4J Attack
-
-115. On the **att-app-server** command prompt, execute this command to launch the Log4J attack.
+111. On the **att-app-server** command prompt, execute this command to launch the Log4J attack.
 
 ```
 /tmp/launch_attack.sh
 ```
 
-116. You will get a “Hello, world!” message as a response indicating that the attack is successful.
+112. This time, you will not see the ‘Hello, world” message as the attack will have been blocked by the NGFW.
 
-![](https://lh4.googleusercontent.com/GYz9URM7HHIWQLvijw0silpoU1VdGwvzXNwFlIFDRS7ipzn5CrnyT6NwuMGHymfatrcKIGmShgx2ut4bfsdf4xM8AefRuyr__IOSU84cPpiRFr6N59HQqG9EVXQR3UZII4W5Vg3Vrye91cmGdA)
+![](https://lh6.googleusercontent.com/n9Z6WR3jJHVxh_5N8TRB-IB2jW0mRal8FwYVW6w09968Gw-sLEB90cKNEdn6YCZsU7YjkgaV4qtV3fJ3yi41qsxIvQvehgUrMWWKulN-oyOH4phjTxzYfFJoEW6I-pMzkVxzCJCsmWfzV1zZ470)
 
-117. Switch context to the **vul-app-server** SSH session and use the following commands to connect to the **vul-app-1 **container and view the /tmp directory. You will see that the vul-app server has been infected with malware.
+<br/>
+
+## Monitor threat log
+
+113. Navigate to the AWS Console browser tab, on the Search bar at the top of the page, type “cloudwatch” and select “CloudWatch” from the search results.
+114. From the left menu, click on “Log groups” and from the list of Log groups, select “PaloAltoCloudNGFW”.
+115. Navigate to AWS CloudWatch browser tab and click on ‘Log Groups’
+116. Click on the THREAT log file.
+
+![](https://lh5.googleusercontent.com/6_x3TcTGkZv2VPIJBxeoDlDG980gohlde3O62gCeQwVsQ1gKf3D1psP9ERpFJTuThYbf0wRjKsJAp2kKzoP4RU7MZUL-Bh17YhSbaLy5yICANUnCFdNZV_BgheGiMOi-3YlQANcUcPtnsVQQz0poo68)
+
+117. Click on the arrow to open the log. You can see that CloudNGFW successfully detected and prevented the attempted Log4J attack.
+
+![](https://lh4.googleusercontent.com/QVyfTld7k4H5CjwDquHgjqsHjOW_bM-kEZSLgEEoF6oV1YbexVzilJpkWLVhuEIGMmaw_iD7Gg91SkV1h2Ap6ibzb6QOht0odJlAvfPC9c-1bWbvuzszM0WPUkXzgpiutjwQKOsnGEMqMCtUgLPiCFQ)
+
+<br/>
+
+## Play around with Security Profiles
+
+118. On the CloudNGFW Console, navigate to _Rulestacks_ and click on ‘Rulestack1’
+
+![](https://lh5.googleusercontent.com/VyhB6hAv8QO2H2bGa5jpDwY5LRyBo5A92qOSWCp0YGlnfTUaNaawJ8ty8fRA5uZh4AtH9tiul6S8HFASqjyj5I70RcsULOeqAXTtbaXEx1xXD3mI8d3jOHB6sZfPw3UggaC1B15aX4AImgG5yMr4naM)
+
+119. Navigate to the ‘Security Profiles’ tab.
+
+![](https://lh4.googleusercontent.com/8ekWbvx50uSvtmAmq9qO6tRzw9xxosIDVPNvv0OttCYdsFNFafudjkC3Aos6DwTXxhHhpJwj2kPxJVUG7yqYzg1zfNqNOtdaKYSivHfydKt4INktcqodf8kkM40GrDAgaajaEFjDa9HYdHGpOqzUdCk)
+
+By default, IPS Vulnerability, Anti-Spyware, Antivirus and File Blocking features are enabled in the Security Profiles. This is what blocks the Log4J attack in the previous step. Just for the purpose of this activity, we can disable some of these profiles.
+
+120. Disable IPS Vulnerability, Anti-Spyware, Antivirus and File Blocking.
+
+![](https://lh6.googleusercontent.com/sfPF-dY13L4PCGcGsRZKet7g0596YboPv0yh-SYWzrVqfYTKuorC8ZRRLH882h9qbwHOye4TboGsRVQh9g-egzNVMXr_ga3ZndZwxiYkOnkzVPw4JrwFCmEA3_IEECfbvnEoQz9VUnJ9JLtHm_fkmGU)
+
+121. From the ‘CONFIG ACTIONS’ dropdown list at the top-right side of the page, select ‘_Deploy Configuration_’.
+
+![](https://lh4.googleusercontent.com/UqMcelwDqPiw9Z78GTOjAZMq2jjM4gWP1Tn6ydbHsV54ckD4tNJyPPe8Mb-moWsfTbuT1IcI1xi5pSUAsS7HE7mFWNlaCOKCluCgNEppmzX5s9Egdpq8Ez8qtjIGKc2_mbxOHFjWvVZBh-4jq9vONJw)
+
+122. Commit status will change to ‘Pending’ and then ‘Success’
+
+![](https://lh4.googleusercontent.com/5YFVro3b1fjIyK3flyHQuXZh8kpejcm4mqJhIUGxxJh1P-V1polTJz_XXa2gQQWo7goiojx3xATq7jiXWDfAOL7ZY1GpY8B34Q65oXIWgxAXnQa-IqnEf_kiEwdOPYPo9sFbZwII8TC-g5_tHRqUCAs)
+
+<br/>
+
+## Relaunch Attack
+
+123. Navigate to att-app-server SSH session and launch the attack again.
+
+```
+/tmp/launch_attack.sh
+```
+
+124. You will get a “Hello, world!” message as a response indicating that the attack is successful.
+
+![](https://lh5.googleusercontent.com/nFEEIa02sRhicmJFOl_pk-XQ3ZAI8AzJDKNVgFWCU7sMOnQcDRF9iv8UP5fPxPZVhehwRlZqUfcsBQDhXKIwQanRux1HluF9jky3NdkPQNpuyiUs8es5TLTNJYO1iqQNoNig_xjz6-WPhiHH_LtJhA)
+
+125. Switch context to the **vul-app-server** SSH session and use the following commands to connect to the **vul-app-1 **container and view the /tmp directory. You will see that the vul-app server has been infected with malware.
 
 ```
 sudo docker exec -it vul-app-1 /bin/sh
 ```
 
 ```
-ls /tmp
+ls -alrt /tmp
 ```
 
-![](https://lh4.googleusercontent.com/tF2_oTkRqpejucoJAINcC305rdNMtfZ-pKtFNDrkLZf6gPARQl822Ii56rde1Kv-xtB4yyXhiahHjnWP3A4fAQQKUyt7SBWpjEqWKmLPc3HHa5PgcItmgHeAGmxPIFyoD0NaAiaSdCghZupG6Q)
+![](https://lh5.googleusercontent.com/wDXixyTsMKEro1mx9hXN4snqToRVgFDSRDY5Vqj8r1LJvgKb4oxJqUEwhv1yfCqQRp7I2918YGw4wgYlMKVU3VKcYNsqivFmw6n_GOO6kw36n0G6f0jroR9vfO1aUVzdmChvKev_lbyuHodgi8oInzQ)
 
-118. Verify the attack by checking the logs on CloudWatch.
-119. Navigate to the AWS Console browser tab, on the Search bar at the top of the page, type “cloudwatch” and select “CloudWatch” from the search results.
-120. From the left menu, click on “Log groups” and from the list of Log groups, select “PaloAltoCloudNGFW”.
+126. Verify the attack by checking the logs on CloudWatch. Navigate to the AWS Console browser tab, on the Search bar at the top of the page, type “cloudwatch” and select “CloudWatch” from the search results.
+127. From the left menu, click on “Log groups” and from the list of Log groups, select “PaloAltoCloudNGFW”.
 
-![](https://lh5.googleusercontent.com/Whtq_tUzgPav8YdU9ipgzto2xR0VtLpfeAsZRguZPMj_cBVPX-GuZJaJ2uEz2Tvn6fJtcEji0TBStAwU6e9tko1JAM3_P4idUmm10mYMMewBY23eMMLLeETKIGK6rYtNll_aR5bVuIZj0opfWw)
+![](https://lh4.googleusercontent.com/NhHMFHA560c1XFo2XBLLESiqa16YBqh51v0F6AjvDApCP19vXeiIrR5UMtTm3G692Ox30bOCyj7yFeAdnxyRl-BRIlUi4FFXnSTsYOimRgX0wNkk-y-1WFCOb3Lm3Et59lJ8RYE1urcoYbG7lzfFM5w)
 
-121. Open the latest log file and you would see the sequence of a successful Log4J attack. Sessions on port 8080, 1389 and 8888.
+128. Open the TRAFFIC log file and you would see the sequence of a successful Log4J attack. Sessions on port 8080, 1389 and 8888.
 
-![](https://lh4.googleusercontent.com/vN9-AvrH3OE0AuSMUBTOBwnpnP6BC-rLzynMWhm8HCHZInjCoYWXGpZ3zntbGpV5Y3CUg-gRhXgUzU2xv1qY-A6DWYSW8UtO9GStFf0mSBfG5g5rFI7E9R3eFT1IcFu45Z1_9YfaJdga-kdIJA)
+![](https://lh5.googleusercontent.com/8hMPemMAJcDB2L1iBgOJw3zytcA4Hd9wBN9rK9vipv43xhy9L9c_ozIezHEonGVfa6g5KvNBkO1_WeDwX-GOJp_-RfjZjBCox75n2cWFtggQ_QFwswsDddk7qtvfKgutIzRNmoWRdPrjVSen-5ujoLA)
 
-![](https://lh4.googleusercontent.com/dMp51MtZstB0Y93zYjc2hZVDQi1TTHvP2VcFMhNKBmsGMF4NtCkccYjTsEgLdgi27brzo8YrKHUP6eu_zi4W82W4WEKivKKcECI1dmN0TvGqKj0RUTGw4J_fcneq7Kf_VSd5YWPnnwz8X8HzzA)
+![](https://lh3.googleusercontent.com/0s3yG7299fXftitIBqgITrApBn15kw1-RLYvQMJo60tF7-DM_pMgtf7Hlfi-6Vrj9f-meCjS3ijqqZ6CDFFuiwyn00Bf_7JtQenSB_8AaW-Wn9V5E1LPDcnnso9TJxd2WrZhUTDlH10uK5CdO9i2Yls)
+
+<br/>
 
 ## Enable Best Practice Security profiles
 
-Lets enable the best practices security profiles on the firewall policy now.
+To secure the East-West traffic once again, you can update the Security Profiles on the Rulestack back to _Best Practice_ and relaunch the attack. This time the attack will be blocked by CloudNGFW.
 
-122. Navigate to the ‘Cloud NGFW Administration’ browser tab and click on Rulestacks.
-
-![](https://lh5.googleusercontent.com/3VIX4QTbCfsANUx-UYis7WQEN_e14vpK81HPtCfFFbYWoDg6meiFayC4-E2E8ouJqqQehU8NpnsV6PfrLVqJqQaVM6dTNbq3ZZ86oDSHWPOw_-NaYqQGiRVF2U8Y0GPl9I9tTA70QQvJx5evmw)
-
-123. Navigate to Security profiles and change to ‘Best Practices’ for each profile.
-
-![](https://lh3.googleusercontent.com/3TkfceIr5HurGrRWU1o8sirFxys-gdhEZ94MiJ_bQi3S9ubgksPfbBaJ2KWiYUp2bfDhv-e8E598QRY58vICrUB4JcPTywk2z17lKGcmlmVMtf05ch81N_CkblaYmTWTzm-AuGM72QAjgyVQrw)
-
-124. Once done, your profiles should look like this
-
-![](https://lh5.googleusercontent.com/BSfsZUeIN29WKBOWM5FPvf3Khsb4aMx5orRm9fN9xUHxtxoQU9Ni9D-lanE7xV9xWddcPnHwmApVelwORlFSdfn2cL7sOqbKtnUCfx29iCkq9Q5q3wRoMUYj-g7sN-9RypUKRNovL4upe73pdg)
-
-125. Click on Save at the bottom of the page.
-
-![](https://lh6.googleusercontent.com/wCgLEibrTHz7T4Tmln6do9vqw6RZYmS9D9jLgmUsQG6oB7_zTeWiuoWZM7XhZWADRJxkjwLirl_zElOwuBRxMLnm01xSISH9eYsk1oj0NC59XwMyvM-BV102TeZXwSIFybrGUlShsSRogELRbQ)
-
-126. Navigate to the top and from the “CONFIG ACTIONS” menu, select “Deploy Configuration”.
-
-![](https://lh3.googleusercontent.com/rtmg_V9yR7Ik8utAyV1nCHdm8jrd4Z9txAnInPWVav2nyQDycfJRSxx1IiZOTYCsbk53A69s9qfXLUNtxpjUocJWF6oZ2R2jR8iNKex5OodZ1b7gme9EFptGWac1gqhRmo1ltShqh0rSd1EBuA)
-
-127. Wait till deployment status changes to ‘Success’.
-
-## Relaunch Attack
-
-128. Navigate to att-app-server SSH session and launch the attack again.
-
-```
-/tmp/launch_attack.sh
-```
-
-129. This time, you will not see the ‘Hello, world” message as the attack will have been blocked by the NGFW.
-
-## Monitor threat log
-
-130. Navigate to AWS CloudWatch browser tab and click on ‘Log Groups’
-
-![](https://lh3.googleusercontent.com/xI22YruZWxxq35A8kOSM_ERCu2eR7EWkkGQgEybnaJf4z-VMJrEvvFmwJSIFhiSeR7Nq21tvk8K3xP_K0zXWieUhLXytekbMQSZgnyCQqq7fxEye4SJM5VXnJH8bOtLNZFLdpVmD8KNbWkWpQg)
-
-131. Click on the threat log file
-132. Click on the arrow to open the log. You can see that CloudNGFW successfully detected and prevented the attempted Log4J attack.
-
-![](https://lh3.googleusercontent.com/yLkm2VP34tYv8dbbIDYM7zkbC-q0g2Wo6Y1Ydv4ypzkhPwb94kgqYd_QHd4eekJtLhNb_mm37ktweVKa57BVnXJ2ZI6KnMQwugreH3le8rPO8YqZKbLbPczjwga_q0VGThrckSMJsfaXoPYwcw)
+<br/><br/>
 
 # Congratulations!!!
 
 Congratulations,  you have successfully completed this Hands ON lab. As part of this lab you went through the process to SUBSCRIBE to Palo Alto CloudNGFW Service on AWS. You familiarize yourself with ways to DEPLOY the service to protect your application on AWS. And finally, you learned how to SECURE your environment with ‘Best Practices’ security profiles from Palo Alto Networks.
 
+<br/><br/>
+
 # Lab Teardown
 
 ## Unsubscribe from CloudNGFW Service
 
-133. Navigate to the AWS Marketplace console. You can search for ‘market’ and click on ‘AWS Marketplace Subscriptions’.
+129. Navigate to the AWS Marketplace console. You can search for ‘market’ and click on ‘AWS Marketplace Subscriptions’.
 
-![](https://lh4.googleusercontent.com/gQ5u7YXQuZh3zWbre7USMVQlRpHDaSXxj1szUCT-19fcDpfC3YYhLQEoZUit6GmSNNokyROpgzlrDSNncWWCYy5cZ4YgGCOIM_z0TSLZv_dbWEJ8WvmOyaww03LGmCMDdByVUqsvK2Q-v7idLQ)
+![](https://lh4.googleusercontent.com/O5hgxnAoeoECZQ08ZRhA8gMvqFo2O3tpKKJkUzoAkVKmrHpmwvI9KXMeZdpawJgbu_-fF-dx0H6iQzZ4W4JJTt9N0DO9mgPc3MeLM2QYQJlS-O_rkE1wzGvZ9gU8WfkiOnEk0OEo67i774T_6oEy10A)
 
-134. Click on ‘Cloud NGFW PAY-as…” service
+130. Click on ‘Cloud NGFW PAY-as…” service
 
-![](https://lh5.googleusercontent.com/BPeN9IN6OjF9Gs2t3qAVpiSSinB81rgT4Tv4uCjuZwYMp3ld8SNrZKMCEaHsBfDYeqrjWSaJaKcJZ-ER2WeP6E_3_aXoYOAghocbRugG2K0ZWarKQpilGR2QFCCXfldow5em5D9s4mp__q-nLA)
+![](https://lh3.googleusercontent.com/4aTSAiGs0nqdYUEYDuY-WaxvkjKc1xSGLsdyZpdTtdS9O6pzgbne3NUMTnlLhz7XHOcaJmOij_KlaEYbu6WaZzQI3E7aratcAcg2muuij9dGayEgCkjP7B2gvHkJL0EoiidW6-0almiUUi36PiezyQ4)
 
-135. Click on ‘Action’ at the bottom of the page and click on ‘Cancel Subscription’
+131. Click on ‘Action’ at the bottom of the page and click on ‘Cancel Subscription’
 
-![](https://lh6.googleusercontent.com/VAKbP2vt0-1M3846kIFfuR-b2bS7HT4PP7H_8FOgc-C1IAyjkQ4H_VX3bnZwqcFluhBeHZoYBFzs9ZyiPIDff5juLb9bhOGUVdPJYECsffKVs477s4j8fHz6wcGDRf3CnJq9GC6yMLZpnymI3A)
+![](https://lh5.googleusercontent.com/G2u3Fh6Vcs8N3ropb_m1u5VSmqIfH-4Zc4CILY-F3R6VkwDYpXXy9SoxvA7rA8ZutG3m402tjmpp7_Ds-XCE8ktnn6xCSKryy3dKBCuP9jQKddB29op-XMJzmX7aBR_ktDLx2iDyrPJL32yLREsx1qI)
 
-136. Select the checkbox to acknowledge and click on ‘Yes, cancel subscription’ 
+132. Select the checkbox to acknowledge and click on ‘Yes, cancel subscription’ 
 
-![](https://lh6.googleusercontent.com/5cOWl3Sbe0Zy2vT0Srz9p3UVTRhLKaVEtFQnr21WvHTXIo2-2kUryMwp7xs7XYKrtOeRfIyBlIB7rQBjtC2CXmyMBPW94Qn51hbnz82A2qEl5BWk8aJyivKubnUnx5lH-WJYkNOlFvz4NIsyHg)
+![](https://lh3.googleusercontent.com/IUAPi4B9B-nT9da7P3P9SnvXiW014vR7FsRuAPy-vcpsQ7amLz9kjNRAmHxioV2SVqafs-c1sdeNCj7nkSfiPiGwYIwCXKUOdI_QEHRvbnbCEi-PzreZzT3nuVaBCG5jhU2yOHCnXKFUnKSqufJai2g)
 
-![](https://lh6.googleusercontent.com/k0-qTq9NEeK9iojEM1XGJpGTeAmVHJgddawh8IcSoDQUo0Pg0_4TF0NtG7tnUEExS7uSamc5NotvkWTgugEIYegCV4CAzZorsUtCf1M1qVg-i1GF3kDf9pzpeM8WWs8ibaCcVsJpbfrHW2f4gQ)
+![](https://lh6.googleusercontent.com/31pCarQ0Gty06az_aEBt0adXKWOjT_yhnYR33kug07SV73bZS1zUMotlqmuwTj5Cowipi7lcoI5atCx3OfFfSGxlBPyi3JmEFALcqPYAVqrg9J72m1esBhnH8AQcfuW1DVX59VSxJBNJcJD68U9Gb40)
 
-137. You have successfully unsubscribed from the CloudNGFW service.
+133. You have successfully unsubscribed from the CloudNGFW service.
+
+<br/><br/>
 
 # Resources and Reference
 
 Here are links to some of the resources for CloudNGFW service.
 
-- eBook: Cloud NGFW
-  - <https://www.paloaltonetworks.com/resources/ebooks/cloud-ngfw>
+- [eBook: Cloud NGFW - Palo Alto Networks](https://www.paloaltonetworks.com/resources/ebooks/cloud-ngfw)
+- [Cloud NGFW: Solution Brief - Palo Alto Networks](https://www.paloaltonetworks.com/resources/whitepapers/cloud-ngfw-solution-brief)
+- [Cloud NGFW for AWS Datasheet - Palo Alto Networks](https://www.paloaltonetworks.com/resources/datasheets/cloud-ngfw-for-aws)
+- [AWS Marketplace: Palo Alto Networks Cloud NGFW (Next-Generation Firewall) Pay-As-You-Go](https://aws.amazon.com/marketplace/pp/prodview-sdwivzp5q76f4#:~:text=7%2DDay%20Free%20Trial%3A%20Click,Get%20started%20today)!
+- [Getting Started with Cloud NGFW for AWS](https://docs.paloaltonetworks.com/cloud-ngfw/aws/cloud-ngfw-on-aws/getting-started-with-cloud-ngfw-for-aws)
 
-- Cloud NGFW Solution Brief
-  - <https://www.paloaltonetworks.com/resources/whitepapers/cloud-ngfw-solution-brief>
-
-- Cloud NGFW for AWS Datasheet
-  - <https://www.paloaltonetworks.com/resources/datasheets/cloud-ngfw-for-aws>
-
-- CloudNGFW Free Trial
-  - <https://aws.amazon.com/marketplace/pp/prodview-sdwivzp5q76f4#:~:text=7%2DDay%20Free%20Trial%3A%20Click,Get%20started%20today>!
-
-- CloudNGFW Documentation
-  - <https://docs.paloaltonetworks.com/cloud-ngfw/aws/cloud-ngfw-on-aws/getting-started-with-cloud-ngfw-for-aws>
+<br/><br/>
 
 # Troubleshooting
 
 ## Issues with the Lab Setup
 
 In case you run into any errors during the execution of the setup script the deployment is a failure, you can follow the below steps;
-
 - Run the setup script again. This should take care of any temporary issues like timeouts, etc.
 - If you still see an error, reach out to your Lab Administrator for further steps.
 - You can also open the _setup.sh_ script in an editor and attempt all the steps one by one in the same order as in the script from a separate terminal.
+
+<br/>
 
 ## Docker related Issues
 
@@ -761,6 +848,3 @@ sudo docker container run -itd --rm --name att-svr -p 8888:8888 -p 1389:1389 us.
 ```
 sudo docker container run -itd --rm --name vul-app-1 -p 8080:8080 us.gcr.io/panw-gcp-team-testing/qwiklab/pcc-log4shell/l4s-demo-app:1.0
 ```
-
-To get to CloudNGFW administrative page:
-<https://web.aws.cloudngfw.paloaltonetworks.com/>
