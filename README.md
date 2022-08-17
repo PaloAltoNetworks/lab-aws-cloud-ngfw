@@ -274,7 +274,7 @@ sudo docker container list -a
 40. If all is good, run the below command to update the “/etc/hosts” file to add an entry for the attack server.
 
 ```
-sudo docker exec vul-app-1 /bin/sh -c 'echo "10.2.1.100    att-svr" >> /etc/hosts'
+sudo docker exec vul-app-1 /bin/sh -c 'echo "10.2.1.100 att-svr" >> /etc/hosts'
 ```
 
 41. To verify the update of the hosts file, try to ping the att-app-server using the hostname provided. Press Ctrl+C to abort the ping.
