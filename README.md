@@ -346,6 +346,7 @@ We will now subscribe to Palo Alto Networks CloudNGFW service. Please follow the
 
 48. By default, you will land on the **Manage Subscriptions** page. Take a look at any existing subscriptions to see if the account is already subscribed to Palo Alto Networks CloudNGFW service.
 49. If you find that the account is already subscribed to Cloud NGFW, we would need to cancel the existing subscription before proceeding further. Click on **Manage** in the CloudNGFW box.
+- If you dont see any existing subscription for AWS CloudNGFW, you can skip to Step 52.
 
 ![](https://lh5.googleusercontent.com/50qYInXqaHI6NlSDgDH_fhagrpWcvjSsn1gAxk73Hip_ybkgaJLxcmEsGknHaZ0lvvKG9pPEaT5H_haQ1v6yowAFqRmD7c_XP2DlyMH5ZOMXJeGk1HV8Yyy8o-G94Md5-7hUGneInUrFrXiHvLOF9Tg)
 
