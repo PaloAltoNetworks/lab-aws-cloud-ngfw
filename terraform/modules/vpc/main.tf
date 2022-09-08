@@ -168,9 +168,10 @@ resource "aws_instance" "this" {
 }
 
 resource "aws_eip" "elasticip" {
-    for_each = { for key, instance in aws_instance.this: key => instance }
+  for_each = { for key, instance in aws_instance.this: key => instance }
 
   instance = each.value.id
+  vpc = true
 }
 
 output "vpc_details" {
